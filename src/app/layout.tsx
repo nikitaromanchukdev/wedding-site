@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, Inter } from "next/font/google";
+import { Bodoni_Moda, Inter } from "next/font/google";
 import { AppProviders } from "@/components/providers/AppProviders";
 import { meta } from "@/resources";
 import "./globals.css";
@@ -10,10 +10,11 @@ const inter = Inter({
   display: "swap",
 });
 
-const cormorant = Cormorant_Garamond({
-  variable: "--font-cormorant",
+const bodoni = Bodoni_Moda({
+  variable: "--font-bodoni",
   subsets: ["latin"],
-  weight: ["300", "400", "500"],
+  weight: "variable",
+  style: ["normal", "italic"],
   display: "swap",
 });
 
@@ -42,7 +43,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${cormorant.variable} h-full antialiased`}
+      className={`${inter.variable} ${bodoni.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-ink text-cream">
         <AppProviders>{children}</AppProviders>

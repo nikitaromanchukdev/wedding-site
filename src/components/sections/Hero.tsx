@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import type React from "react";
 import { hero } from "@/resources";
 
 export function Hero() {
@@ -23,7 +24,9 @@ export function Hero() {
         transition={{ duration: 1.2, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
         className="font-display text-display-xl text-cream"
       >
-        {hero.couple}
+        {hero.couple.split(" & ").reduce<React.ReactNode[]>((acc, part, i) =>
+          i === 0 ? [part] : [...acc, <em key="amp"> &amp; </em>, part],
+        [])}
       </motion.h1>
 
       <motion.p
