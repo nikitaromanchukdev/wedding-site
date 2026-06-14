@@ -50,7 +50,7 @@ export function DateReveal() {
     <section
       ref={sectionRef}
       aria-label="Wedding date and venue"
-      className="relative flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden bg-cream px-8 py-[8svh] text-center text-ink"
+      className="relative flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden bg-cream px-3 py-[8svh] text-center text-ink sm:px-8"
     >
       {/* Eyebrow */}
       <p

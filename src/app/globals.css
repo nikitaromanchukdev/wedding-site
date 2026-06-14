@@ -19,6 +19,7 @@
   /* Spacing */
   --space-section: clamp(4rem, 12vh, 8rem);
   --touch-min: 44px;
+  --gx: 12px;
 }
 
 @theme inline {
@@ -89,6 +90,130 @@ body {
   font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
+}
+
+/* ─── Journey / Timeline ─── */
+#timeline {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 12svh var(--gx) 8svh;
+  background: var(--ink);
+  overflow: hidden;
+  position: relative;
+}
+
+.journey-head {
+  text-align: center;
+  margin-bottom: 5rem;
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.journey-head.in { opacity: 1; transform: translateY(0); }
+
+.section-eyebrow {
+  display: block;
+  font-size: 0.56rem;
+  font-weight: 400;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: var(--champagne);
+  margin-bottom: 1rem;
+}
+.section-heading {
+  font-family: var(--font-bodoni), Georgia, serif;
+  font-size: clamp(2.4rem, 10vw, 4.5rem);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.05;
+  color: var(--cream);
+}
+
+.t-timeline {
+  width: 100%;
+  position: relative;
+}
+.t-timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, rgba(207, 181, 158, 0.12) 15%, rgba(207, 181, 158, 0.12) 85%, transparent);
+  transform: translateX(-50%);
+}
+
+.t-item {
+  display: grid;
+  grid-template-columns: 1fr 28px 1fr;
+  gap: 1rem;
+  padding: 2.8rem 0;
+  align-items: start;
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.t-item.in { opacity: 1; transform: translateY(0); }
+
+.t-left  { text-align: right; }
+.t-right { text-align: left; }
+
+.t-year {
+  font-family: var(--font-bodoni), Georgia, serif;
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  color: var(--champagne);
+  display: block;
+  margin-bottom: 0.45rem;
+}
+.t-title {
+  font-family: var(--font-bodoni), Georgia, serif;
+  font-size: clamp(1rem, 3.8vw, 1.25rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--cream);
+  line-height: 1.4;
+  display: block;
+  margin-bottom: 0.5rem;
+  white-space: pre-line;
+}
+.t-detail {
+  font-size: 0.6rem;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  color: rgba(255, 250, 250, 0.3);
+  line-height: 1.8;
+}
+
+.t-node {
+  display: flex;
+  justify-content: center;
+  padding-top: 0.15rem;
+  position: relative;
+  z-index: 2;
+}
+.t-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #6F4E37;
+  border: 1px solid var(--champagne);
+  box-shadow: 0 0 0 5px rgba(207, 181, 158, 0.07);
+  flex-shrink: 0;
+  transition: box-shadow 0.3s ease, background 0.3s ease;
+}
+.t-item.in .t-dot {
+  box-shadow: 0 0 0 8px rgba(207, 181, 158, 0.1), 0 0 20px rgba(207, 181, 158, 0.1);
+}
+.t-item:last-child .t-dot {
+  background: var(--champagne);
+  border-color: #B9D9EB;
+  box-shadow: 0 0 0 8px rgba(185, 217, 235, 0.1);
 }
 
 /* ─── Hero ambient glow ─── */
@@ -193,6 +318,9 @@ body {
 
 /* ─── Desktop enhancement layer ─── */
 @media (min-width: 768px) {
+  :root {
+    --gx: 2rem;
+  }
   .section {
     padding-top: var(--space-section);
     padding-bottom: var(--space-section);

@@ -6,7 +6,7 @@ import { hero } from "@/resources";
 
 export function Hero() {
   return (
-    <section className="hero relative flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden px-5 py-20 text-center">
+    <section className="hero relative flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden px-3 py-20 text-center">
       <div className="hero__glow pointer-events-none absolute inset-0" aria-hidden />
 
       <motion.p
