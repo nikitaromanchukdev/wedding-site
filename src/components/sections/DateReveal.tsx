@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { site } from "@/resources";
+import { dateReveal, site } from "@/resources";
 
 function pad(n: number) {
   return String(n).padStart(2, "0");
@@ -61,7 +61,7 @@ export function DateReveal() {
           transitionDelay: "100ms",
         }}
       >
-        Mark your calendar
+        {dateReveal.eyebrow}
       </p>
 
       {/* Giant date */}
@@ -154,10 +154,10 @@ export function DateReveal() {
         }}
       >
         {[
-          { value: countdown.days, label: "Days" },
-          { value: countdown.hours, label: "Hours" },
-          { value: countdown.minutes, label: "Mins" },
-          { value: countdown.seconds, label: "Secs" },
+          { value: countdown.days, label: dateReveal.countdown.days },
+          { value: countdown.hours, label: dateReveal.countdown.hours },
+          { value: countdown.minutes, label: dateReveal.countdown.minutes },
+          { value: countdown.seconds, label: dateReveal.countdown.seconds },
         ].map(({ value, label }, i) => (
           <div key={label} className="flex items-start">
             <div className="flex flex-col items-center gap-1">

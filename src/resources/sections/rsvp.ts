@@ -5,6 +5,9 @@ export const rsvp = {
   title: "Will you join us?",
   description: `Please respond by ${site.rsvpDeadline}. We can't wait to celebrate with you.`,
   submitLabel: "Send RSVP",
+  submittingLabel: "Sending...",
+  successMessage: "Thank you — your RSVP has been received.",
+  errorMessage: "Something went wrong. Please try again.",
   fields: {
     name: {
       label: "Your name",

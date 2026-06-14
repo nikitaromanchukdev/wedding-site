@@ -10,7 +10,9 @@ export function Timeline() {
     const section = sectionRef.current;
     if (!section) return;
 
-    const targets = section.querySelectorAll<HTMLElement>(".journey-head, .t-item");
+    const targets = section.querySelectorAll<HTMLElement>(
+      ".journey-head, .t-item"
+    );
 
     const obs = new IntersectionObserver(
       (entries) => {
@@ -22,7 +24,7 @@ export function Timeline() {
           obs.unobserve(el);
         });
       },
-      { threshold: 0.14 },
+      { threshold: 0.14 }
     );
 
     targets.forEach((el) => obs.observe(el));
@@ -30,11 +32,7 @@ export function Timeline() {
   }, []);
 
   return (
-    <section
-      ref={sectionRef}
-      id="timeline"
-      aria-label="Wedding day programme"
-    >
+    <section ref={sectionRef} id="timeline" aria-label="Wedding day programme">
       <div className="journey-head">
         <span className="section-eyebrow">{timeline.label}</span>
         <h2 className="section-heading">{timeline.title}</h2>
@@ -51,11 +49,7 @@ export function Timeline() {
             </>
           );
 
-          const sideContent = (
-            <span className="t-detail" style={{ paddingTop: "1.8rem", display: "block" }}>
-              {item.description}
-            </span>
-          );
+          const sideContent = <p className="t-detail">{item.description}</p>;
 
           return (
             <div
@@ -64,9 +58,7 @@ export function Timeline() {
               role="listitem"
               data-delay={String(i * 90)}
             >
-              <div className="t-left">
-                {isEven ? mainContent : sideContent}
-              </div>
+              <div className="t-left">{isEven ? mainContent : sideContent}</div>
               <div className="t-node">
                 <div className="t-dot" />
               </div>

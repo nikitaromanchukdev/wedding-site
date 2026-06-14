@@ -14,7 +14,7 @@
   --text-display-md: clamp(2rem, 8vw, 3.25rem);
   --text-body-lg: clamp(1.125rem, 4vw, 1.375rem);
   --text-body: clamp(1rem, 3.5vw, 1.125rem);
-  --text-label: 0.6875rem;
+  --text-label: 0.75rem;
 
   /* Spacing */
   --space-section: clamp(4rem, 12vh, 8rem);
@@ -116,7 +116,7 @@ body {
 
 .section-eyebrow {
   display: block;
-  font-size: 0.56rem;
+  font-size: 0.75rem;
   font-weight: 400;
   letter-spacing: 0.38em;
   text-transform: uppercase;
@@ -164,13 +164,42 @@ body {
 
 .t-year {
   font-family: var(--font-bodoni), Georgia, serif;
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   font-weight: 400;
   letter-spacing: 0.18em;
   color: var(--champagne);
   display: block;
   margin-bottom: 0.45rem;
 }
+.t-left .t-year {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.7rem;
+}
+.t-left .t-year::before {
+  content: '';
+  width: 28px;
+  height: 1px;
+  background: var(--champagne);
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+
+.t-right .t-year {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+.t-right .t-year::after {
+  content: '';
+  width: 28px;
+  height: 1px;
+  background: var(--champagne);
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+
 .t-title {
   font-family: var(--font-bodoni), Georgia, serif;
   font-size: clamp(1rem, 3.8vw, 1.25rem);
@@ -183,7 +212,7 @@ body {
   white-space: pre-line;
 }
 .t-detail {
-  font-size: 0.6rem;
+  font-size: 0.75rem;
   font-weight: 300;
   letter-spacing: 0.04em;
   color: rgba(255, 250, 250, 0.3);

@@ -95,17 +95,17 @@ export function Rsvp() {
 
           <div className="mt-2 flex flex-col gap-3">
             <Button type="submit" disabled={status === "submitting"}>
-              {status === "submitting" ? "Sending..." : rsvp.submitLabel}
+              {status === "submitting" ? rsvp.submittingLabel : rsvp.submitLabel}
             </Button>
 
             {status === "success" && (
               <p className="text-center text-sm text-champagne">
-                Thank you — your RSVP has been received.
+                {rsvp.successMessage}
               </p>
             )}
             {status === "error" && (
               <p className="text-center text-sm text-red-400/80">
-                Something went wrong. Please try again.
+                {rsvp.errorMessage}
               </p>
             )}
             {!isGoogleFormConfigured() && status === "idle" && (

@@ -3,6 +3,7 @@ export { googleForm, getGoogleFormActionUrl, getGoogleFormEntryId, isGoogleFormC
 export type { RsvpFieldName } from "./forms";
 
 export { hero } from "./sections/hero";
+export { dateReveal } from "./sections/dateReveal";
 export { details } from "./sections/details";
 export { timeline } from "./sections/timeline";
 export { rsvp } from "./sections/rsvp";
