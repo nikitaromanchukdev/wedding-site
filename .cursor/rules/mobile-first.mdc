@@ -1,0 +1,26 @@
+---
+description: Mobile-first design requirements for the wedding invitation experience
+alwaysApply: true
+---
+
+# Mobile First
+
+90%+ of guests open this invitation from mobile messaging apps (WhatsApp, Telegram, Messenger, iMessage). Design for vertical smartphone viewports first — never desktop-first with mobile adaptation.
+
+## Layout & Content
+
+- Storytelling journey optimized for vertical scroll on a phone screen
+- Large typography, concise content blocks, clear hierarchy
+- Minimize horizontal layouts; avoid desktop-only multi-column patterns
+- Touch targets ≥ 44×44px; thumb-driven navigation
+- Each section immersive on a single phone screen
+
+## Motion & Performance
+
+- Scroll-triggered reveals and subtle touch feedback replace desktop cursor effects
+- Optimize animations for mobile GPUs; prefer `transform` and `opacity`
+- When choosing between impressive desktop interaction and better mobile UX, **always prioritize mobile**
+
+## Desktop
+
+Desktop is an enhanced presentation layer built on the mobile experience. Emotional impact, storytelling flow, and core interactions must be fully preserved on mobile without desktop-only effects.

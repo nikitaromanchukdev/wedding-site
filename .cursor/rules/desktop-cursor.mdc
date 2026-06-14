@@ -1,0 +1,44 @@
+---
+description: Desktop lens-style cursor and interaction system
+globs: "**/*.{tsx,ts,css,scss}"
+alwaysApply: false
+---
+
+# Desktop Cursor (Lens System)
+
+Desktop only — mobile uses touch interactions, scroll reveals, and responsive motion instead. Never emulate this cursor on touch devices.
+
+## Behavior
+
+- Intelligent magnetic lens: smooth interpolation, inertia, physics-based lag
+- Soft attraction toward interactive elements (buttons, cards, nav, video controls, timeline, RSVP)
+- Gentle snap — never abrupt locking
+- Nearby elements subtly react to cursor proximity
+- Acts as spotlight/lens revealing depth and interactivity
+
+## Visual
+
+- Circular, glass-like translucent lens with soft blur and subtle glow
+- Slight zoom effect; premium, understated; never distracting
+
+## States
+
+| State | Behavior |
+|-------|----------|
+| Default | Exploration |
+| Hover | Gentle expansion |
+| CTA | Stronger magnetic pull |
+| Video | Play/pause affordance |
+| Form | Precise focus feedback |
+
+## Implementation
+
+```tsx
+// ✅ Hide custom cursor on touch/coarse pointers
+@media (hover: hover) and (pointer: fine) { /* enable lens cursor */ }
+
+// ❌ BAD — cursor on mobile
+document.body.style.cursor = 'none';
+```
+
+Use `requestAnimationFrame` for movement; respect `prefers-reduced-motion`.
