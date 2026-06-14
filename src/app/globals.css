@@ -245,6 +245,97 @@ body {
   box-shadow: 0 0 0 8px rgba(185, 217, 235, 0.1);
 }
 
+/* ─── Details Strip ─── */
+#details {
+  min-height: 100svh;
+  background: var(--ink);
+  border-top: 1px solid rgba(207, 181, 158, 0.07);
+  padding: 8svh var(--gx);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.details-head {
+  text-align: center;
+  margin-bottom: 4rem;
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.details-head.in { opacity: 1; transform: translateY(0); }
+
+.details-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+  max-width: 540px;
+}
+
+.detail-card {
+  padding: 2rem 0;
+  border-bottom: 1px solid rgba(207, 181, 158, 0.07);
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.detail-card:last-child { border-bottom: none; }
+.detail-card.in { opacity: 1; transform: translateY(0); }
+
+.dc-icon {
+  font-size: 1.1rem;
+  margin-bottom: 0.9rem;
+  display: block;
+  opacity: 0.55;
+}
+.dc-title {
+  font-family: var(--font-bodoni), Georgia, serif;
+  font-size: 1.15rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--champagne);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+.dc-body {
+  font-size: 0.75rem;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  color: rgba(255, 250, 250, 0.35);
+  line-height: 1.9;
+}
+.dc-body strong {
+  font-weight: 400;
+  color: rgba(255, 250, 250, 0.55);
+}
+
+@media (max-width: 767px) {
+  .dc-icon {
+    display: inline;
+    margin-bottom: 0;
+    margin-right: 0.6rem;
+  }
+  .dc-title {
+    display: inline;
+  }
+}
+
+@media (min-width: 768px) {
+  .details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    max-width: 680px;
+  }
+  .detail-card {
+    padding: 2rem;
+    border-bottom: none;
+    border-right: 1px solid rgba(207, 181, 158, 0.07);
+  }
+  .detail-card:last-child { border-right: none; }
+}
+
 /* ─── Hero ambient glow ─── */
 .hero__glow {
   background:
