@@ -4,7 +4,7 @@
 :root {
   /* Palette */
   --black: #0b0b0d;
-  --coffee: #6f4e37;
+  --dark-chocolate: #341f1a;
   --hazelnut: #cfb59e;
   --hazelnut-light: #ddc8b4;
   --snow: #fffafa;
@@ -27,7 +27,7 @@
 
 @theme inline {
   --color-black: var(--black);
-  --color-coffee: var(--coffee);
+  --color-dark-chocolate: var(--dark-chocolate);
   --color-hazelnut: var(--hazelnut);
   --color-hazelnut-light: var(--hazelnut-light);
   --color-snow: var(--snow);
@@ -235,7 +235,7 @@ body {
   width: 9px;
   height: 9px;
   border-radius: 50%;
-  background: var(--coffee);
+  background: var(--dark-chocolate);
   border: 1px solid var(--hazelnut);
   box-shadow: 0 0 0 5px rgba(207, 181, 158, 0.07);
   flex-shrink: 0;

@@ -25,7 +25,7 @@ export const timeline = {
       event: "Cocktail\nHour",
       description:
         "An hour of aperitivo and golden light. The terrace is yours to wander. The evening is just beginning.",
-      accent: "coffee" as const,
+      accent: "dark-chocolate" as const,
       roman: "III",
       index: "Cocktails",
     },
