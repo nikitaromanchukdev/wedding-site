@@ -6,6 +6,7 @@ import {
   CURSOR_MAGNET,
   CURSOR_SCALE,
   LERP,
+  LERP_POSITION,
   PROXIMITY_RADIUS,
   SNAP_RADIUS,
   type CursorState,
@@ -102,8 +103,8 @@ export function useLensPhysics() {
         nearbyRef.current = null;
       }
 
-      position.current.x += (targetX - position.current.x) * LERP;
-      position.current.y += (targetY - position.current.y) * LERP;
+      position.current.x += (targetX - position.current.x) * LERP_POSITION;
+      position.current.y += (targetY - position.current.y) * LERP_POSITION;
       scale.current += (targetScale - scale.current) * LERP;
 
       if (nextState !== stateRef.current) setState(nextState);

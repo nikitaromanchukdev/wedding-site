@@ -23,3 +23,5 @@ export const CURSOR_MAGNET: Record<CursorState, number> = {
 export const SNAP_RADIUS = 140;
 export const PROXIMITY_RADIUS = 200;
 export const LERP = 0.14;
+/** Lens position follow speed. Matches the mvp's lerp factor (0.1) for the trailing delay. */
+export const LERP_POSITION = 0.07;
