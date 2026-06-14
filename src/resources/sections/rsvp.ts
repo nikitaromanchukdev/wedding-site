@@ -8,6 +8,7 @@ export const rsvp = {
   submittingLabel: "Sending...",
   successMessage: "Thank you — your RSVP has been received.",
   errorMessage: "Something went wrong. Please try again.",
+  comingSoonMessage: "RSVP opens soon. Check back closer to the date.",
   fields: {
     name: {
       label: "Your name",

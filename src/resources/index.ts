@@ -1,4 +1,4 @@
-export { site, meta } from "./site";
+export { site, meta, features } from "./site";
 export { googleForm, getGoogleFormActionUrl, getGoogleFormEntryId, isGoogleFormConfigured } from "./forms";
 export type { RsvpFieldName } from "./forms";
 

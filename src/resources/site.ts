@@ -14,6 +14,11 @@ export const site = {
   rsvpDeadline: "August 1st",
 } as const;
 
+export const features = {
+  /** Show the RSVP form. When false, the form is hidden and a fallback message shows. */
+  rsvpForm: false,
+} as const;
+
 export const meta = {
   titleSuffix: "Wedding Invitation",
   get title() {
