@@ -36,13 +36,13 @@ export function Rsvp() {
   return (
     <Section id="rsvp" className="pb-24">
       <ScrollReveal>
-        <p data-reveal className="label mb-4 text-champagne/70">
+        <p data-reveal className="label mb-4 text-hazelnut/70">
           {rsvp.label}
         </p>
-        <h2 data-reveal className="font-display text-display-md text-cream">
+        <h2 data-reveal className="font-display text-display-md text-snow">
           {rsvp.title}
         </h2>
-        <p data-reveal className="mt-4 text-body text-cream/55">
+        <p data-reveal className="mt-4 text-body text-snow/55">
           {rsvp.description}
         </p>
 
@@ -53,7 +53,7 @@ export function Rsvp() {
             onSubmit={handleSubmit}
           >
             <label className="flex flex-col gap-2">
-              <span className="label text-cream/50">
+              <span className="label text-snow/50">
                 {rsvp.fields.name.label}
               </span>
               <input
@@ -63,12 +63,12 @@ export function Rsvp() {
                 placeholder={rsvp.fields.name.placeholder}
                 autoComplete="name"
                 {...{ [CURSOR_ATTR]: "form" }}
-                className="form-input min-h-12 rounded-xl border border-cream/10 bg-cream/[0.04] px-4 py-3 text-cream placeholder:text-cream/25 outline-none transition-colors focus:border-champagne/40"
+                className="form-input min-h-12 rounded-xl border border-snow/10 bg-snow/[0.04] px-4 py-3 text-snow placeholder:text-snow/25 outline-none transition-colors focus:border-hazelnut/40"
               />
             </label>
 
             <label className="flex flex-col gap-2">
-              <span className="label text-cream/50">
+              <span className="label text-snow/50">
                 {rsvp.fields.attending.label}
               </span>
               <select
@@ -76,7 +76,7 @@ export function Rsvp() {
                 required
                 defaultValue=""
                 {...{ [CURSOR_ATTR]: "form" }}
-                className="form-input min-h-12 rounded-xl border border-cream/10 bg-cream/[0.04] px-4 py-3 text-cream outline-none transition-colors focus:border-champagne/40"
+                className="form-input min-h-12 rounded-xl border border-snow/10 bg-snow/[0.04] px-4 py-3 text-snow outline-none transition-colors focus:border-hazelnut/40"
               >
                 <option value="" disabled>
                   {rsvp.fields.attending.placeholder}
@@ -90,7 +90,7 @@ export function Rsvp() {
             </label>
 
             <label className="flex flex-col gap-2">
-              <span className="label text-cream/50">
+              <span className="label text-snow/50">
                 {rsvp.fields.message.label}
               </span>
               <textarea
@@ -98,7 +98,7 @@ export function Rsvp() {
                 rows={3}
                 placeholder={rsvp.fields.message.placeholder}
                 {...{ [CURSOR_ATTR]: "form" }}
-                className="form-input resize-none rounded-xl border border-cream/10 bg-cream/[0.04] px-4 py-3 text-cream placeholder:text-cream/25 outline-none transition-colors focus:border-champagne/40"
+                className="form-input resize-none rounded-xl border border-snow/10 bg-snow/[0.04] px-4 py-3 text-snow placeholder:text-snow/25 outline-none transition-colors focus:border-hazelnut/40"
               />
             </label>
 
@@ -110,7 +110,7 @@ export function Rsvp() {
               </Button>
 
               {status === "success" && (
-                <p className="text-center text-sm text-champagne">
+                <p className="text-center text-sm text-hazelnut">
                   {rsvp.successMessage}
                 </p>
               )}
@@ -120,7 +120,7 @@ export function Rsvp() {
                 </p>
               )}
               {!isGoogleFormConfigured() && status === "idle" && (
-                <p className="text-center text-xs text-cream/30">
+                <p className="text-center text-xs text-snow/30">
                   Configure Google Form in src/resources/forms.ts
                 </p>
               )}

@@ -13,10 +13,10 @@ type ButtonProps = Omit<HTMLMotionProps<"button">, "children"> & {
 
 const variants = {
   primary:
-    "bg-champagne text-ink hover:bg-champagne-light active:scale-[0.98]",
+    "bg-hazelnut text-black hover:bg-hazelnut-light active:scale-[0.98]",
   secondary:
-    "border border-cream/20 text-cream hover:border-champagne/50 hover:text-champagne active:scale-[0.98]",
-  ghost: "text-cream/70 hover:text-cream active:scale-[0.98]",
+    "border border-snow/20 text-snow hover:border-hazelnut/50 hover:text-hazelnut active:scale-[0.98]",
+  ghost: "text-snow/70 hover:text-snow active:scale-[0.98]",
 };
 
 export function Button({

@@ -50,11 +50,11 @@ export function DateReveal() {
     <section
       ref={sectionRef}
       aria-label="Wedding date and venue"
-      className="relative flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden bg-cream px-3 py-[8svh] text-center text-ink sm:px-8"
+      className="relative flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden bg-snow px-3 py-[8svh] text-center text-black sm:px-8"
     >
       {/* Eyebrow */}
       <p
-        className="label mb-12 text-champagne transition-all duration-700"
+        className="label mb-12 text-hazelnut transition-all duration-700"
         style={{
           opacity: visible ? 1 : 0,
           transform: visible ? "translateY(0)" : "translateY(16px)",
@@ -73,7 +73,7 @@ export function DateReveal() {
         }}
       >
         <span
-          className="font-display block text-ink leading-[0.85]"
+          className="font-display block text-black leading-[0.85]"
           style={{ fontSize: "clamp(7rem,32vw,16rem)", fontWeight: 400 }}
         >
           {site.dateDisplay.day}
@@ -87,7 +87,7 @@ export function DateReveal() {
         }}
       >
         <span
-          className="font-display block italic text-ink"
+          className="font-display block italic text-black"
           style={{ fontSize: "clamp(2rem,9vw,5rem)", fontWeight: 400, letterSpacing: "0.04em" }}
         >
           {site.dateDisplay.month}
@@ -101,7 +101,7 @@ export function DateReveal() {
         }}
       >
         <span
-          className="mt-3 block text-champagne"
+          className="mt-3 block text-hazelnut"
           style={{ fontSize: "clamp(0.8rem,3.5vw,1.6rem)", fontWeight: 300, letterSpacing: "0.5em" }}
         >
           {site.dateDisplay.year}
@@ -118,11 +118,11 @@ export function DateReveal() {
           transition: "opacity 0.7s ease 850ms, transform 0.9s cubic-bezier(0.22,1,0.36,1) 850ms",
         }}
       >
-        <div className="h-px w-12 bg-gradient-to-r from-transparent to-champagne" />
-        <div className="h-[5px] w-[5px] rotate-45 bg-champagne" />
-        <div className="h-[3px] w-[3px] rotate-45 bg-champagne/35" />
-        <div className="h-[5px] w-[5px] rotate-45 bg-champagne" />
-        <div className="h-px w-12 bg-gradient-to-l from-transparent to-champagne" />
+        <div className="h-px w-12 bg-gradient-to-r from-transparent to-hazelnut" />
+        <div className="h-[5px] w-[5px] rotate-45 bg-hazelnut" />
+        <div className="h-[3px] w-[3px] rotate-45 bg-hazelnut/35" />
+        <div className="h-[5px] w-[5px] rotate-45 bg-hazelnut" />
+        <div className="h-px w-12 bg-gradient-to-l from-transparent to-hazelnut" />
       </div>
 
       {/* Venue */}
@@ -134,13 +134,13 @@ export function DateReveal() {
         }}
       >
         <span
-          className="font-display mb-2 block italic text-ink"
+          className="font-display mb-2 block italic text-black"
           style={{ fontSize: "clamp(1.5rem,6vw,2.5rem)", fontWeight: 400 }}
         >
           {site.venue}
         </span>
-        <span className="label mb-1 block text-champagne">{site.location}</span>
-        <span className="label block text-champagne/60">{site.dateDisplay.time}</span>
+        <span className="label mb-1 block text-hazelnut">{site.location}</span>
+        <span className="label block text-hazelnut/60">{site.dateDisplay.time}</span>
       </div>
 
       {/* Countdown */}
@@ -162,16 +162,16 @@ export function DateReveal() {
           <div key={label} className="flex items-start">
             <div className="flex flex-col items-center gap-1">
               <span
-                className="font-display min-w-[2ch] text-center text-ink leading-none"
+                className="font-display min-w-[2ch] text-center text-black leading-none"
                 style={{ fontSize: "clamp(1.8rem,8vw,3.5rem)", fontWeight: 400 }}
               >
                 {pad(value)}
               </span>
-              <span className="label text-champagne">{label}</span>
+              <span className="label text-hazelnut">{label}</span>
             </div>
             {i < 3 && (
               <span
-                className="font-display px-1 text-ink/15 leading-none"
+                className="font-display px-1 text-black/15 leading-none"
                 style={{ fontSize: "clamp(1.8rem,8vw,3.5rem)", fontWeight: 400 }}
               >
                 :

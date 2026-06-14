@@ -45,7 +45,7 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${bodoni.variable} h-full antialiased`}
     >
-      <body className="min-h-full bg-ink text-cream">
+      <body className="min-h-full bg-black text-snow">
         <AppProviders>{children}</AppProviders>
       </body>
     </html>

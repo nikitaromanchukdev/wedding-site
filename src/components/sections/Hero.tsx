@@ -13,7 +13,7 @@ export function Hero() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-        className="mb-6 text-xs font-medium uppercase tracking-[0.35em] text-champagne/80"
+        className="mb-6 text-xs font-medium uppercase tracking-[0.35em] text-hazelnut/80"
       >
         {hero.eyebrow}
       </motion.p>
@@ -22,7 +22,7 @@ export function Hero() {
         initial={{ opacity: 0, y: 32 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.2, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-        className="font-display text-display-xl text-cream"
+        className="font-display text-display-xl text-snow"
       >
         {hero.couple.split(" & ").reduce<React.ReactNode[]>((acc, part, i) =>
           i === 0 ? [part] : [...acc, <em key="amp"> &amp; </em>, part],
@@ -33,7 +33,7 @@ export function Hero() {
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        className="mt-6 max-w-xs text-body-lg text-cream/60"
+        className="mt-6 max-w-xs text-body-lg text-snow/60"
       >
         {hero.tagline}
       </motion.p>
@@ -44,11 +44,11 @@ export function Hero() {
         transition={{ duration: 1, delay: 1.2 }}
         className="mt-16 flex flex-col items-center gap-2"
       >
-        <span className="text-sm text-cream/40">{hero.scrollHint}</span>
+        <span className="text-sm text-snow/40">{hero.scrollHint}</span>
         <motion.span
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          className="block h-8 w-px bg-gradient-to-b from-champagne/60 to-transparent"
+          className="block h-8 w-px bg-gradient-to-b from-hazelnut/60 to-transparent"
         />
       </motion.div>
     </section>
