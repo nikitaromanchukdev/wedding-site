@@ -1,26 +1,187 @@
 @import "tailwindcss";
 
+/* ─── Mobile-first design tokens ─── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --ink: #0c0b0a;
+  --cream: #f5f0e8;
+  --champagne: #c4a265;
+  --champagne-light: #d4b87a;
+  --background: var(--ink);
+  --foreground: var(--cream);
+
+  /* Typography scale — mobile base */
+  --text-display-xl: clamp(2.75rem, 12vw, 5rem);
+  --text-display-md: clamp(2rem, 8vw, 3.25rem);
+  --text-body-lg: clamp(1.125rem, 4vw, 1.375rem);
+  --text-body: clamp(1rem, 3.5vw, 1.125rem);
+  --text-label: 0.6875rem;
+
+  /* Spacing */
+  --space-section: clamp(4rem, 12vh, 8rem);
+  --touch-min: 44px;
 }
 
 @theme inline {
+  --color-ink: var(--ink);
+  --color-cream: var(--cream);
+  --color-champagne: var(--champagne);
+  --color-champagne-light: var(--champagne-light);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-cormorant);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ─── Base ─── */
+html {
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+/* ─── Typography utilities ─── */
+.font-display {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.text-display-xl {
+  font-size: var(--text-display-xl);
+}
+
+.text-display-md {
+  font-size: var(--text-display-md);
+}
+
+.text-body-lg {
+  font-size: var(--text-body-lg);
+  line-height: 1.6;
+}
+
+.text-body {
+  font-size: var(--text-body);
+  line-height: 1.7;
+}
+
+.label {
+  font-size: var(--text-label);
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* ─── Hero ambient glow ─── */
+.hero__glow {
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 40%, rgba(196, 162, 101, 0.12), transparent),
+    radial-gradient(ellipse 60% 40% at 50% 100%, rgba(196, 162, 101, 0.06), transparent);
+}
+
+/* ─── Cursor proximity reactions (desktop) ─── */
+@media (hover: hover) and (pointer: fine) {
+  [data-cursor-nearby] {
+    transform: translateY(-2px);
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .detail-card[data-cursor-nearby] {
+    border-color: rgba(196, 162, 101, 0.25);
+    background: rgba(245, 240, 232, 0.05);
+  }
+
+  .timeline-item[data-cursor-nearby] .label {
+    color: var(--champagne-light);
+  }
+}
+
+/* ─── Desktop lens cursor ─── */
+@media (hover: hover) and (pointer: fine) {
+  .lens-cursor-active,
+  .lens-cursor-active * {
+    cursor: none !important;
+  }
+}
+
+.lens-cursor {
+  width: 48px;
+  height: 48px;
+  will-change: transform, width, height;
+}
+
+.lens-cursor__glass {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(245, 240, 232, 0.04);
+  backdrop-filter: blur(6px) saturate(1.4);
+  -webkit-backdrop-filter: blur(6px) saturate(1.4);
+  box-shadow:
+    inset 0 0 12px rgba(255, 255, 255, 0.06),
+    0 0 24px rgba(196, 162, 101, 0.08);
+  transition: box-shadow 0.3s ease;
+}
+
+.lens-cursor__ring {
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  border: 1px solid rgba(196, 162, 101, 0.25);
+  transition: border-color 0.3s ease, opacity 0.3s ease;
+}
+
+.lens-cursor[data-state="cta"] .lens-cursor__ring {
+  border-color: rgba(196, 162, 101, 0.5);
+}
+
+.lens-cursor[data-state="cta"] .lens-cursor__glass {
+  box-shadow:
+    inset 0 0 16px rgba(255, 255, 255, 0.08),
+    0 0 32px rgba(196, 162, 101, 0.15);
+}
+
+.lens-cursor[data-state="form"] .lens-cursor__ring {
+  border-color: rgba(245, 240, 232, 0.4);
+  inset: -1px;
+}
+
+.lens-cursor[data-state="video"] .lens-cursor__glass::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 55%;
+  transform: translate(-50%, -50%);
+  border-style: solid;
+  border-width: 6px 0 6px 10px;
+  border-color: transparent transparent transparent rgba(245, 240, 232, 0.6);
+}
+
+/* ─── Reduced motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ─── Desktop enhancement layer ─── */
+@media (min-width: 768px) {
+  .section {
+    padding-top: var(--space-section);
+    padding-bottom: var(--space-section);
+  }
 }
