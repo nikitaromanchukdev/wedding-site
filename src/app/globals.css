@@ -414,6 +414,62 @@ body {
   color: rgba(255, 250, 250, 0.35);
 }
 
+/* ─── Palette bands (mobile only, see PaletteBands.tsx) ─── */
+#palette { display: none; }
+
+@media (max-width: 767px) {
+  /* desktop swatch circles hidden on mobile; bands section shown instead */
+  #dresscode .swatch-grid { display: none; }
+
+  #palette {
+    display: flex;
+    min-height: 100svh;
+    background: var(--black);
+  }
+  .band-grid {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    list-style: none;
+  }
+  .band {
+    position: relative;
+    flex: 1;
+    min-height: 96px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.1rem 1.4rem;
+    overflow: hidden;
+  }
+  .band-fill {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  .band-name {
+    position: relative;
+    z-index: 1;
+    align-self: center;
+    font-family: var(--font-bodoni), Georgia, serif;
+    font-size: 1.7rem;
+    font-weight: 300;
+    font-style: italic;
+  }
+  .band-hex {
+    position: relative;
+    z-index: 1;
+    align-self: flex-end;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+  }
+  .band[data-dark="true"] .band-name { color: var(--snow); }
+  .band[data-dark="true"] .band-hex { color: rgba(255, 250, 250, 0.6); }
+  .band[data-dark="false"] .band-name { color: var(--black); }
+  .band[data-dark="false"] .band-hex { color: rgba(11, 11, 13, 0.55); }
+}
+
 @media (min-width: 768px) {
   .swatch-chip {
     width: 84px;

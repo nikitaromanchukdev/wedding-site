@@ -52,6 +52,7 @@ export function DressCode() {
             key={color.name}
             className="swatch"
             data-delay={String(i * 80)}
+            data-dark={String(color.dark)}
           >
             <span
               className="swatch-chip"
