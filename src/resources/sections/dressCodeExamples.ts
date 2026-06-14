@@ -1,55 +1,59 @@
 import type { StaticImageData } from "next/image";
+import look1 from "@/assets/dress-code/look-1.jpeg";
+import look2 from "@/assets/dress-code/look-2.jpeg";
+import look3 from "@/assets/dress-code/look-3.jpeg";
+import look4 from "@/assets/dress-code/look-4.jpeg";
+import look5 from "@/assets/dress-code/look-5.jpeg";
+import look6 from "@/assets/dress-code/look-6.jpeg";
+import look7 from "@/assets/dress-code/look-7.jpeg";
+import look8 from "@/assets/dress-code/look-8.jpeg";
+import look9 from "@/assets/dress-code/look-9.jpeg";
+import look10 from "@/assets/dress-code/look-10.jpeg";
+import look11 from "@/assets/dress-code/look-11.jpeg";
+import look12 from "@/assets/dress-code/look-12.jpeg";
+import look13 from "@/assets/dress-code/look-13.jpeg";
+import look14 from "@/assets/dress-code/look-14.jpeg";
+import look15 from "@/assets/dress-code/look-15.jpeg";
+import look16 from "@/assets/dress-code/look-16.jpeg";
+import look17 from "@/assets/dress-code/look-17.jpeg";
+import look18 from "@/assets/dress-code/look-18.jpeg";
 
 export type DressCodeExample = {
   id: string;
   alt: string;
-  /**
-   * Outfit photo. Static import (blur-up) or a URL string. Placeholder URLs are
-   * used for now; swap to static imports from src/assets/dress-code/ later.
-   */
-  src: StaticImageData | string | null;
-  /** Palette var used for the fallback gradient + ambient tint. */
+  /** Outfit photo — static import gives automatic blur-up lazy loading. */
+  src: StaticImageData;
+  /** Palette var used for the skeleton / ambient tint. */
   tint: string;
-  /** Desktop scatter (percent of the showcase box). */
-  x: number;
-  y: number;
-  size: "s" | "m" | "l";
-  /** Deterministic z-rotation jitter (deg) so the scatter looks hand-placed. */
-  rotate: number;
-  /** Depth 0..1 — higher = closer (larger, more opaque). */
-  depth: number;
   /** Mobile collage span — columns and rows controlled independently. */
   colSpan: number;
   rowSpan: number;
 };
 
-/** Deterministic placeholder portrait until real assets are wired in. */
-const ph = (id: string) => `https://picsum.photos/seed/${id}/800/1100`;
+const TINTS = ["--black", "--dark-chocolate", "--hazelnut", "--snow", "--columbia-blue"];
 
-/**
- * Outfit inspiration cards. Layout values are hand-tuned and deterministic
- * (no Math.random) so SSR and client render identically. Cards avoid the
- * dead-center where the heading sits.
- *
- * To add real photos: drop files in src/assets/dress-code/, `import` them here,
- * and set each `src`. Static imports give automatic blur-up lazy loading.
- */
-export const dressCodeExamples: DressCodeExample[] = [
-  { id: "look-1", alt: "Evening look in black", src: ph("look-1"), tint: "--black", x: 16, y: 22, size: "m", rotate: -7, depth: 0.45, colSpan: 1, rowSpan: 2 },
-  { id: "look-2", alt: "Tailored suit in dark chocolate", src: ph("look-2"), tint: "--dark-chocolate", x: 82, y: 18, size: "l", rotate: 6, depth: 0.7, colSpan: 1, rowSpan: 1 },
-  { id: "look-3", alt: "Soft hazelnut gown", src: ph("look-3"), tint: "--hazelnut", x: 28, y: 70, size: "l", rotate: 4, depth: 0.85, colSpan: 2, rowSpan: 1 },
-  { id: "look-4", alt: "Snow-toned cocktail dress", src: ph("look-4"), tint: "--snow", x: 74, y: 74, size: "m", rotate: -5, depth: 0.6, colSpan: 1, rowSpan: 1 },
-  { id: "look-5", alt: "Columbia blue accent outfit", src: ph("look-5"), tint: "--columbia-blue", x: 50, y: 14, size: "s", rotate: 9, depth: 0.3, colSpan: 1, rowSpan: 2 },
-  { id: "look-6", alt: "Classic dark formalwear", src: ph("look-6"), tint: "--dark-chocolate", x: 9, y: 50, size: "s", rotate: -10, depth: 0.35, colSpan: 1, rowSpan: 1 },
-  { id: "look-7", alt: "Neutral palette ensemble", src: ph("look-7"), tint: "--hazelnut", x: 91, y: 48, size: "m", rotate: 8, depth: 0.55, colSpan: 1, rowSpan: 2 },
-  { id: "look-8", alt: "Evening attire detail", src: ph("look-8"), tint: "--snow", x: 55, y: 88, size: "s", rotate: -3, depth: 0.4, colSpan: 2, rowSpan: 1 },
+const PHOTOS: StaticImageData[] = [
+  look1, look2, look3, look4, look5, look6, look7, look8, look9,
+  look10, look11, look12, look13, look14, look15, look16, look17, look18,
 ];
 
-export const SIZE_PX: Record<DressCodeExample["size"], { w: number; h: number }> = {
-  s: { w: 120, h: 160 },
-  m: { w: 170, h: 230 },
-  l: { w: 220, h: 300 },
-};
+// Deterministic collage spans (col x row), cycled across the photos.
+const SPANS: Array<[number, number]> = [
+  [1, 2], [1, 1], [2, 1], [1, 1], [1, 2], [1, 1],
+  [2, 1], [1, 1], [1, 2], [1, 1], [1, 1], [2, 1],
+];
+
+export const dressCodeExamples: DressCodeExample[] = PHOTOS.map((src, i) => {
+  const [colSpan, rowSpan] = SPANS[i % SPANS.length];
+  return {
+    id: `look-${i + 1}`,
+    alt: `Dress code inspiration ${i + 1}`,
+    src,
+    tint: TINTS[i % TINTS.length],
+    colSpan,
+    rowSpan,
+  };
+});
 
 /**
  * Static brightness as a function of distance from the showcase center (50,50).
