@@ -44,6 +44,8 @@ export function ImageCard({
           fill
           sizes={sizes}
           priority={priority}
+          loading={priority ? undefined : "lazy"}
+          decoding="async"
           placeholder={typeof src === "object" ? "blur" : "empty"}
           className="image-card__img"
           data-loaded={loaded}
