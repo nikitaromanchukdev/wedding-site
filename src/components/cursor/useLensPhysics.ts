@@ -1,18 +1,22 @@
 "use client";
 
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback } from "react";
+import { useMotionValue, useSpring, useTransform } from "framer-motion";
 import {
   CURSOR_ATTR,
   CURSOR_MAGNET,
   CURSOR_SCALE,
-  LERP,
-  LERP_POSITION,
   PROXIMITY_RADIUS,
   SNAP_RADIUS,
   type CursorState,
   type CursorTargetType,
 } from "./cursor-config";
 import { useCursor } from "./CursorProvider";
+
+const BASE_SIZE = 48;
+// Spring tuning: lower stiffness = more trailing/magnetic glide.
+const POS_SPRING = { stiffness: 150, damping: 20, mass: 0.6 };
+const SIZE_SPRING = { stiffness: 200, damping: 26, mass: 0.5 };
 
 function resolveState(type: CursorTargetType | null): CursorState {
   if (!type || type === "interactive") return "hover";
@@ -21,124 +25,105 @@ function resolveState(type: CursorTargetType | null): CursorState {
 
 function getTargetCenter(el: HTMLElement) {
   const rect = el.getBoundingClientRect();
-  return {
-    x: rect.left + rect.width / 2,
-    y: rect.top + rect.height / 2,
-  };
+  return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
 }
 
 export function useLensPhysics() {
-  const { state, setState, setVisible } = useCursor();
+  const { setState, setVisible } = useCursor();
 
-  const pointer = useRef({ x: 0, y: 0 });
-  const position = useRef({ x: 0, y: 0 });
-  const scale = useRef(1);
-  const rafId = useRef(0);
-  const lensRef = useRef<HTMLDivElement>(null);
-  const nearbyRef = useRef<HTMLElement | null>(null);
-  const stateRef = useRef<CursorState>(state);
+  // Targets the springs chase. Springs supply the magnetic glide/trailing.
+  const targetX = useMotionValue(0);
+  const targetY = useMotionValue(0);
+  const targetSize = useMotionValue(BASE_SIZE);
 
-  useEffect(() => {
-    stateRef.current = state;
-  }, [state]);
+  const x = useSpring(targetX, POS_SPRING);
+  const y = useSpring(targetY, POS_SPRING);
+  const size = useSpring(targetSize, SIZE_SPRING);
+
+  // Top-left from center + current size, so width/height changes stay centered.
+  const left = useTransform([x, size], ([cx, s]: number[]) => cx - s / 2);
+  const top = useTransform([y, size], ([cy, s]: number[]) => cy - s / 2);
 
   const start = useCallback(() => {
-    const findNearestTarget = (x: number, y: number) => {
+    let nearby: HTMLElement | null = null;
+    let lastState: CursorState = "default";
+
+    const findNearest = (px: number, py: number) => {
       const targets = document.querySelectorAll<HTMLElement>(`[${CURSOR_ATTR}]`);
       let nearest: HTMLElement | null = null;
       let nearestDist = Infinity;
       let nearestType: CursorTargetType | null = null;
-
       for (const el of targets) {
-        const center = getTargetCenter(el);
-        const dist = Math.hypot(center.x - x, center.y - y);
-
-        if (dist < nearestDist) {
-          nearestDist = dist;
+        const c = getTargetCenter(el);
+        const d = Math.hypot(c.x - px, c.y - py);
+        if (d < nearestDist) {
+          nearestDist = d;
           nearest = el;
-          nearestType =
-            (el.getAttribute(CURSOR_ATTR) as CursorTargetType) ?? "interactive";
+          nearestType = (el.getAttribute(CURSOR_ATTR) as CursorTargetType) ?? "interactive";
         }
       }
-
       return { nearest, nearestDist, nearestType };
     };
 
-    const tick = () => {
-      const lens = lensRef.current;
-      if (!lens) {
-        rafId.current = requestAnimationFrame(tick);
-        return;
-      }
-
-      const { x: px, y: py } = pointer.current;
-      const { nearest, nearestDist, nearestType } = findNearestTarget(px, py);
-
-      let targetX = px;
-      let targetY = py;
-      let nextState: CursorState = "default";
-      let targetScale = CURSOR_SCALE.default;
-
-      if (nearest && nearestDist < SNAP_RADIUS) {
-        const center = getTargetCenter(nearest);
-        const magnet = CURSOR_MAGNET[resolveState(nearestType)];
-        const pull = 1 - nearestDist / SNAP_RADIUS;
-        const strength = magnet * pull;
-
-        targetX = px + (center.x - px) * strength;
-        targetY = py + (center.y - py) * strength;
-        nextState = resolveState(nearestType);
-        targetScale = CURSOR_SCALE[nextState];
-      }
-
-      if (nearest && nearestDist < PROXIMITY_RADIUS) {
-        const el = nearest;
-        if (nearbyRef.current !== el) {
-          nearbyRef.current?.removeAttribute("data-cursor-nearby");
-          el.setAttribute("data-cursor-nearby", "");
-          nearbyRef.current = el;
-        }
-      } else if (nearbyRef.current) {
-        nearbyRef.current.removeAttribute("data-cursor-nearby");
-        nearbyRef.current = null;
-      }
-
-      position.current.x += (targetX - position.current.x) * LERP_POSITION;
-      position.current.y += (targetY - position.current.y) * LERP_POSITION;
-      scale.current += (targetScale - scale.current) * LERP;
-
-      if (nextState !== stateRef.current) setState(nextState);
-
-      const size = 48 * scale.current;
-      lens.style.transform = `translate3d(${position.current.x - size / 2}px, ${position.current.y - size / 2}px, 0)`;
-      lens.style.width = `${size}px`;
-      lens.style.height = `${size}px`;
-
-      rafId.current = requestAnimationFrame(tick);
-    };
-
     const onPointerMove = (e: PointerEvent) => {
-      pointer.current = { x: e.clientX, y: e.clientY };
       setVisible(true);
+      const px = e.clientX;
+      const py = e.clientY;
+      const { nearest, nearestDist, nearestType } = findNearest(px, py);
+
+      let tx = px;
+      let ty = py;
+      let nextState: CursorState = "default";
+      let scale = CURSOR_SCALE.default;
+
+      // Magnetic pull toward the nearest target's center within snap range.
+      if (nearest && nearestDist < SNAP_RADIUS) {
+        const c = getTargetCenter(nearest);
+        const st = resolveState(nearestType);
+        const strength = CURSOR_MAGNET[st] * (1 - nearestDist / SNAP_RADIUS);
+        tx = px + (c.x - px) * strength;
+        ty = py + (c.y - py) * strength;
+        nextState = st;
+        scale = CURSOR_SCALE[st];
+      }
+
+      targetX.set(tx);
+      targetY.set(ty);
+      targetSize.set(BASE_SIZE * scale);
+
+      if (nextState !== lastState) {
+        lastState = nextState;
+        setState(nextState);
+      }
+
+      // Proximity highlight on the element itself.
+      if (nearest && nearestDist < PROXIMITY_RADIUS) {
+        if (nearby !== nearest) {
+          nearby?.removeAttribute("data-cursor-nearby");
+          nearest.setAttribute("data-cursor-nearby", "");
+          nearby = nearest;
+        }
+      } else if (nearby) {
+        nearby.removeAttribute("data-cursor-nearby");
+        nearby = null;
+      }
     };
 
     const onPointerLeave = () => {
       setVisible(false);
-      nearbyRef.current?.removeAttribute("data-cursor-nearby");
-      nearbyRef.current = null;
+      nearby?.removeAttribute("data-cursor-nearby");
+      nearby = null;
+      lastState = "default";
       setState("default");
     };
 
     window.addEventListener("pointermove", onPointerMove);
     window.addEventListener("pointerleave", onPointerLeave);
-    rafId.current = requestAnimationFrame(tick);
-
     return () => {
       window.removeEventListener("pointermove", onPointerMove);
       window.removeEventListener("pointerleave", onPointerLeave);
-      cancelAnimationFrame(rafId.current);
     };
-  }, [setVisible, setState]);
+  }, [setState, setVisible, targetX, targetY, targetSize]);
 
-  return { lensRef, start };
+  return { left, top, size, start };
 }

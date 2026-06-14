@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { useEffect } from "react";
 import { useFinePointer } from "@/hooks/useFinePointer";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
@@ -10,7 +11,7 @@ export function LensCursor() {
   const isFinePointer = useFinePointer();
   const prefersReducedMotion = usePrefersReducedMotion();
   const { isVisible, state } = useCursor();
-  const { lensRef, start } = useLensPhysics();
+  const { left, top, size, start } = useLensPhysics();
 
   useEffect(() => {
     if (!isFinePointer || prefersReducedMotion) return;
@@ -21,14 +22,14 @@ export function LensCursor() {
   if (!isFinePointer || prefersReducedMotion) return null;
 
   return (
-    <div
-      ref={lensRef}
+    <motion.div
       aria-hidden
       data-state={state}
+      style={{ x: left, y: top, width: size, height: size }}
       className={`lens-cursor pointer-events-none fixed top-0 left-0 z-[9999] transition-opacity duration-300 ${isVisible ? "opacity-100" : "opacity-0"}`}
     >
       <div className="lens-cursor__glass" />
       <div className="lens-cursor__ring" />
-    </div>
+    </motion.div>
   );
 }
