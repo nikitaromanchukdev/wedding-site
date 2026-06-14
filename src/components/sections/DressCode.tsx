@@ -1,10 +1,17 @@
 "use client";
 
-import { Fragment, useEffect, useRef } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
+import { DressCodeCollage } from "@/components/sections/DressCodeCollage";
+import { DressCodeShowcase } from "@/components/sections/DressCodeShowcase";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { dressCode } from "@/resources";
 
 export function DressCode() {
   const sectionRef = useRef<HTMLElement>(null);
+  const [mounted, setMounted] = useState(false);
+  const isDesktop = useMediaQuery("(min-width: 768px)");
+
+  useEffect(() => setMounted(true), []);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -33,6 +40,8 @@ export function DressCode() {
 
   return (
     <section ref={sectionRef} id="dresscode" aria-label="Dress code">
+      {mounted && isDesktop && <DressCodeShowcase />}
+
       <div className="dresscode-head">
         <span className="section-eyebrow">{dressCode.label}</span>
         <h2 className="section-heading" style={{ fontSize: "clamp(2rem, 8vw, 3.5rem)" }}>
@@ -64,6 +73,8 @@ export function DressCode() {
           </li>
         ))}
       </ul>
+
+      {mounted && !isDesktop && <DressCodeCollage />}
     </section>
   );
 }

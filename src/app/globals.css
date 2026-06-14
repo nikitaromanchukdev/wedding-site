@@ -480,6 +480,120 @@ body {
   }
 }
 
+/* ─── Dress-code showcase (reusable image card) ─── */
+.image-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(207, 181, 158, 0.15);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+  background: var(--black);
+}
+.image-card__skeleton {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--card-tint, var(--hazelnut)) 0%, rgba(11, 11, 13, 0.85) 120%);
+  opacity: 1;
+  transition: opacity 0.6s ease;
+}
+.image-card__skeleton[data-loaded="true"] { opacity: 0; }
+.image-card__img {
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+.image-card__img[data-loaded="true"] { opacity: 1; }
+
+/* ─── Desktop: full-bleed background grid, lit toward the center ─── */
+#dresscode { position: relative; overflow: hidden; }
+
+.dc-showcase {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-auto-rows: 1fr;
+  gap: 14px;
+  padding: 20px;
+  /* spacious center fade — cards dissolve toward the middle, present at the edges */
+  -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, transparent 8%, #000 100%);
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, transparent 8%, #000 100%);
+}
+/* head + swatches sit above the grid */
+.dresscode-head { position: relative; z-index: 2; }
+#dresscode .swatch-grid { position: relative; z-index: 2; }
+
+.dc-cell {
+  position: relative;
+  min-height: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.dc-cell:hover { transform: scale(1.04); }
+.dc-cell--placeholder { pointer-events: none; }
+
+.dc-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: rgba(8, 7, 6, 0.62);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  cursor: pointer;
+}
+.dc-modal {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  width: min(72vw, 440px);
+  height: min(82vh, 620px);
+  z-index: 60;
+}
+
+/* ─── Mobile: long-press collage ─── */
+.dc-collage {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: 140px;
+  grid-auto-flow: dense;
+  gap: 8px;
+  width: 100%;
+  margin-top: 2.5rem;
+}
+.dc-collage-item {
+  position: relative;
+  height: 100%;
+  cursor: pointer;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+.dc-collage-expanded {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  background: var(--black);
+}
+.dc-collage-expanded .image-card {
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dc-cell { transition: none; }
+  .dc-cell:hover { transform: none; }
+}
+
 /* ─── Hero ambient glow ─── */
 .hero__glow {
   background:
