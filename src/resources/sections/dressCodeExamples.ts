@@ -33,14 +33,15 @@ export type DressCodeExample = {
 const TINTS = ["--black", "--dark-chocolate", "--hazelnut", "--snow", "--columbia-blue"];
 
 const PHOTOS: StaticImageData[] = [
-  look1, look2, look3, look4, look5, look6, look7, look8, look9,
-  look10, look11, look12, look13, look14, look15, look16, look17, look18,
+  look6, look2, look3, look4, look5, look1, look7, look8, look9,
+  look10, look11, look12, look14, look13, look15, look17,look16, look18,
 ];
 
 // Deterministic collage spans (col x row), cycled across the photos.
+// Assets are all portrait → only square (1x1) and vertical (1x2) cells.
 const SPANS: Array<[number, number]> = [
-  [1, 2], [1, 1], [2, 1], [1, 1], [1, 2], [1, 1],
-  [2, 1], [1, 1], [1, 2], [1, 1], [1, 1], [2, 1],
+  [1, 2], [1, 1], [1, 1], [1, 2], [1, 1], [1, 2],
+  [1, 1], [1, 1], [1, 2], [1, 1], [1, 2], [1, 1],
 ];
 
 export const dressCodeExamples: DressCodeExample[] = PHOTOS.map((src, i) => {
