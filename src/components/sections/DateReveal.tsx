@@ -40,7 +40,7 @@ export function DateReveal() {
           obs.disconnect();
         }
       },
-      { threshold: 0.1 },
+      { threshold: 0.1 }
     );
     obs.observe(el);
     return () => obs.disconnect();
@@ -50,7 +50,7 @@ export function DateReveal() {
     <section
       ref={sectionRef}
       aria-label="Wedding date and venue"
-      className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden bg-snow px-3 py-[8svh] text-center text-black sm:px-8"
+      className="relative flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden bg-snow px-3 py-[8svh] text-center text-black sm:px-8"
     >
       {/* Eyebrow */}
       <p
@@ -88,7 +88,11 @@ export function DateReveal() {
       >
         <span
           className="font-display block italic text-black"
-          style={{ fontSize: "clamp(2rem,9vw,5rem)", fontWeight: 400, letterSpacing: "0.04em" }}
+          style={{
+            fontSize: "clamp(2rem,9vw,5rem)",
+            fontWeight: 400,
+            letterSpacing: "0.04em",
+          }}
         >
           {site.dateDisplay.month}
         </span>
@@ -102,7 +106,11 @@ export function DateReveal() {
       >
         <span
           className="mt-3 block text-hazelnut"
-          style={{ fontSize: "clamp(0.8rem,3.5vw,1.6rem)", fontWeight: 300, letterSpacing: "0.5em" }}
+          style={{
+            fontSize: "clamp(0.8rem,3.5vw,1.6rem)",
+            fontWeight: 300,
+            letterSpacing: "0.5em",
+          }}
         >
           {site.dateDisplay.year}
         </span>
@@ -115,7 +123,8 @@ export function DateReveal() {
         style={{
           opacity: visible ? 1 : 0,
           transform: visible ? "scaleX(1)" : "scaleX(0.4)",
-          transition: "opacity 0.7s ease 850ms, transform 0.9s cubic-bezier(0.22,1,0.36,1) 850ms",
+          transition:
+            "opacity 0.7s ease 850ms, transform 0.9s cubic-bezier(0.22,1,0.36,1) 850ms",
         }}
       >
         <div className="h-px w-12 bg-gradient-to-r from-transparent to-hazelnut" />
@@ -130,7 +139,8 @@ export function DateReveal() {
         style={{
           opacity: visible ? 1 : 0,
           transform: visible ? "translateY(0)" : "translateY(18px)",
-          transition: "opacity 0.9s cubic-bezier(0.22,1,0.36,1) 1100ms, transform 0.9s cubic-bezier(0.22,1,0.36,1) 1100ms",
+          transition:
+            "opacity 0.9s cubic-bezier(0.22,1,0.36,1) 1100ms, transform 0.9s cubic-bezier(0.22,1,0.36,1) 1100ms",
         }}
       >
         <span
@@ -140,7 +150,9 @@ export function DateReveal() {
           {site.venue}
         </span>
         <span className="label mb-1 block text-hazelnut">{site.location}</span>
-        <span className="label block text-hazelnut/60">{site.dateDisplay.time}</span>
+        <span className="label block text-hazelnut/60">
+          {site.dateDisplay.time}
+        </span>
       </div>
 
       {/* Countdown */}
@@ -150,7 +162,8 @@ export function DateReveal() {
         style={{
           opacity: visible ? 1 : 0,
           transform: visible ? "translateY(0)" : "translateY(16px)",
-          transition: "opacity 0.9s cubic-bezier(0.22,1,0.36,1) 1350ms, transform 0.9s cubic-bezier(0.22,1,0.36,1) 1350ms",
+          transition:
+            "opacity 0.9s cubic-bezier(0.22,1,0.36,1) 1350ms, transform 0.9s cubic-bezier(0.22,1,0.36,1) 1350ms",
         }}
       >
         {[
@@ -163,7 +176,10 @@ export function DateReveal() {
             <div className="flex flex-col items-center gap-1">
               <span
                 className="font-display min-w-[2ch] text-center text-black leading-none"
-                style={{ fontSize: "clamp(1.8rem,8vw,3.5rem)", fontWeight: 400 }}
+                style={{
+                  fontSize: "clamp(1.8rem,8vw,3.5rem)",
+                  fontWeight: 400,
+                }}
               >
                 {pad(value)}
               </span>
@@ -172,7 +188,10 @@ export function DateReveal() {
             {i < 3 && (
               <span
                 className="font-display px-1 text-black/15 leading-none"
-                style={{ fontSize: "clamp(1.8rem,8vw,3.5rem)", fontWeight: 400 }}
+                style={{
+                  fontSize: "clamp(1.8rem,8vw,3.5rem)",
+                  fontWeight: 400,
+                }}
               >
                 :
               </span>

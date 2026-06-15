@@ -28,7 +28,7 @@ export function Hero() {
   }, []);
 
   return (
-    <section className="hero relative flex min-h-[100svh] flex-col items-center overflow-hidden px-3 py-20 text-center">
+    <section className="hero relative flex min-h-[100dvh] flex-col items-center overflow-hidden px-3 py-20 text-center">
       {/* Layer 1 — ambient color background */}
       <div
         className="hero__glow pointer-events-none absolute inset-0"
@@ -47,7 +47,7 @@ export function Hero() {
           fill
           priority
           sizes="100vw"
-          quality={20}
+          quality={25}
           placeholder="blur"
           className="object-cover"
         />
@@ -58,7 +58,7 @@ export function Hero() {
             alt=""
             fill
             sizes="100vw"
-            quality={90}
+            quality={100}
             className="object-cover transition-opacity duration-700"
             style={{ opacity: hiResLoaded ? 1 : 0 }}
             onLoad={() => setHiResLoaded(true)}

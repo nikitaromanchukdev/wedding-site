@@ -43,7 +43,7 @@ html {
   scroll-behavior: smooth;
   /* proximity (not mandatory) + no forced stop — avoids fighting momentum
      scroll on mobile, which caused flicker/height jumps with the toolbar. */
-  scroll-snap-type: y proximity;
+  scroll-snap-type: y mandatory;
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -101,7 +101,7 @@ body {
 
 /* ─── Journey / Timeline ─── */
 #timeline {
-  min-height: 100svh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -254,7 +254,7 @@ body {
 
 /* ─── Details Strip ─── */
 #details {
-  min-height: 100svh;
+  min-height: 100dvh;
   background: var(--black);
   border-top: 1px solid rgba(207, 181, 158, 0.07);
   padding: 8svh var(--gx);
@@ -345,7 +345,7 @@ body {
 
 /* ─── Dress Code ─── */
 #dresscode {
-  min-height: 100svh;
+  min-height: 100dvh;
   background: var(--black);
   border-top: 1px solid rgba(207, 181, 158, 0.07);
   padding: 8svh var(--gx);
@@ -425,7 +425,7 @@ body {
 
   #palette {
     display: flex;
-    min-height: 100svh;
+    min-height: 100dvh;
     background: var(--black);
   }
   .band-grid {
@@ -568,7 +568,7 @@ body {
   align-content: center;
   gap: 8px;
   width: 100%;
-  min-height: 100svh;
+  min-height: 100dvh;
   padding: var(--gx);
   background: var(--black);
 }
