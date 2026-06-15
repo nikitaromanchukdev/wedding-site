@@ -47,6 +47,7 @@ html {
 
 section {
   scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
 body {
@@ -558,15 +559,21 @@ body {
   z-index: 60;
 }
 
-/* ─── Mobile: long-press collage ─── */
+/* ─── Mobile: long-press collage (its own block, after the palette) ─── */
 .dc-collage {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-auto-rows: 140px;
   grid-auto-flow: dense;
+  align-content: center;
   gap: 8px;
   width: 100%;
-  margin-top: 2.5rem;
+  min-height: 100svh;
+  padding: var(--gx);
+  background: var(--black);
+}
+@media (min-width: 768px) {
+  .dc-collage { display: none; }
 }
 .dc-collage-item {
   position: relative;

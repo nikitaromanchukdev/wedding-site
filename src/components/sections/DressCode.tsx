@@ -1,7 +1,6 @@
 "use client";
 
 import { Fragment, useEffect, useRef, useState } from "react";
-import { DressCodeCollage } from "@/components/sections/DressCodeCollage";
 import { DressCodeShowcase } from "@/components/sections/DressCodeShowcase";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { dressCode } from "@/resources";
@@ -73,8 +72,6 @@ export function DressCode() {
           </li>
         ))}
       </ul>
-
-      {mounted && !isDesktop && <DressCodeCollage />}
     </section>
   );
 }

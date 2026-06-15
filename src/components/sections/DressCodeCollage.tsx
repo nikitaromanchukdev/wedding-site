@@ -3,12 +3,14 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useRef, useState } from "react";
 import { ImageCard } from "@/components/ui/ImageCard";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { dressCodeExamples } from "@/resources";
 
 const LONG_PRESS_MS = 400;
 const MOVE_CANCEL_PX = 10;
 
 export function DressCodeCollage() {
+  const isMobile = useMediaQuery("(max-width: 767px)");
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const timer = useRef<number | null>(null);
   const startPt = useRef<{ x: number; y: number } | null>(null);
@@ -41,8 +43,10 @@ export function DressCodeCollage() {
 
   const active = dressCodeExamples.find((c) => c.id === expandedId) ?? null;
 
+  if (!isMobile) return null;
+
   return (
-    <div className="dc-collage" aria-label="Dress code inspiration">
+    <section id="dresscode-collage" className="dc-collage" aria-label="Dress code inspiration">
       {dressCodeExamples.map((card) => (
         <motion.div
           key={card.id}
@@ -76,6 +80,6 @@ export function DressCodeCollage() {
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </section>
   );
 }

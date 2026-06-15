@@ -1,6 +1,7 @@
 import { DateReveal } from "@/components/sections/DateReveal";
 import { Details } from "@/components/sections/Details";
 import { DressCode } from "@/components/sections/DressCode";
+import { DressCodeCollage } from "@/components/sections/DressCodeCollage";
 import { Hero } from "@/components/sections/Hero";
 import { PaletteBands } from "@/components/sections/PaletteBands";
 import { Rsvp } from "@/components/sections/Rsvp";
@@ -15,6 +16,7 @@ export default function Home() {
       <Details />
       <DressCode />
       <PaletteBands />
+      <DressCodeCollage />
       <Rsvp />
     </main>
   );
