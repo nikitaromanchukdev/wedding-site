@@ -637,10 +637,28 @@ body {
     radial-gradient(ellipse 60% 40% at 50% 100%, rgba(196, 162, 101, 0.06), transparent);
 }
 
+/* ─── Hero photo layer (bright center, dark edges) ─── */
+.hero__photo {
+  -webkit-mask-image: radial-gradient(ellipse 72% 66% at 50% 45%, #000 16%, transparent 74%);
+  mask-image: radial-gradient(ellipse 72% 66% at 50% 45%, #000 16%, transparent 74%);
+}
+.hero__photo img {
+  object-position: 55%;
+  /* warm the B&W toward the palette — soft sepia, not full mono */
+  filter: sepia(0.35) saturate(1.3) hue-rotate(-12deg) brightness(1.04) contrast(1.02);
+}
+
+@media (min-width: 768px) {
+  .hero__photo img {
+    object-position: center 35%;
+  }
+}
+
 /* ─── Custom cursor ring (desktop, fine pointer) ─── */
 html.cursor-hidden,
 html.cursor-hidden * {
   cursor: none !important;
+  caret-color: transparent;
 }
 
 #cursor {
