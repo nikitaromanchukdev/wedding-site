@@ -32,24 +32,41 @@ export type DressCodeExample = {
 
 const TINTS = ["--black", "--dark-chocolate", "--hazelnut", "--snow", "--columbia-blue"];
 
-const PHOTOS: StaticImageData[] = [
-  look6, look2, look3, look4, look5, look1, look7, look8, look9,
-  look10, look11, look12, look14, look13, look15, look17,look16, look18,
+const PHOTOS: { id: string; src: StaticImageData }[] = [
+  { id: "look-6", src: look6 },
+  { id: "look-2", src: look2 },
+  { id: "look-3", src: look3 },
+  { id: "look-4", src: look4 },
+  { id: "look-5", src: look5 },
+  { id: "look-1", src: look1 },
+  { id: "look-7", src: look7 },
+  { id: "look-8", src: look8 },
+  { id: "look-9", src: look9 },
+  { id: "look-10", src: look10 },
+  { id: "look-11", src: look11 },
+  { id: "look-12", src: look12 },
+  { id: "look-14", src: look14 },
+  { id: "look-13", src: look13 },
+  { id: "look-15", src: look15 },
+  { id: "look-17", src: look17 },
+  { id: "look-16", src: look16 },
+  { id: "look-18", src: look18 },
 ];
 
 // Deterministic collage spans (col x row), cycled across the photos.
 // Assets are all portrait → only square (1x1) and vertical (1x2) cells.
 const SPANS: Array<[number, number]> = [
   [1, 2], [1, 1], [1, 1], [1, 2], [1, 1], [1, 2],
-  [1, 1], [1, 1], [1, 2], [1, 1], [1, 2], [1, 1],
+  [1, 1], [1, 1], [1, 2], [1, 1], [1, 2], [1, 1], [1,2]
 ];
 
-export const dressCodeExamples: DressCodeExample[] = PHOTOS.map((src, i) => {
+export const dressCodeExamples: DressCodeExample[] = PHOTOS.map((photo, i) => {
   const [colSpan, rowSpan] = SPANS[i % SPANS.length];
+
   return {
-    id: `look-${i + 1}`,
+    id: photo.id,
     alt: `Dress code inspiration ${i + 1}`,
-    src,
+    src: photo.src,
     tint: TINTS[i % TINTS.length],
     colSpan,
     rowSpan,
