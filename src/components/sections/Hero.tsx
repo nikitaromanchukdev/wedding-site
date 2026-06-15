@@ -28,7 +28,7 @@ export function Hero() {
   }, []);
 
   return (
-    <section className="hero relative flex min-h-[100dvh] flex-col items-center overflow-hidden px-3 py-20 text-center">
+    <section className="hero relative flex min-h-[100svh] flex-col items-center overflow-hidden px-3 py-20 text-center">
       {/* Layer 1 — ambient color background */}
       <div
         className="hero__glow pointer-events-none absolute inset-0"

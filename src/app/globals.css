@@ -41,13 +41,14 @@
 /* ─── Base ─── */
 html {
   scroll-behavior: smooth;
-  scroll-snap-type: y mandatory;
+  /* proximity (not mandatory) + no forced stop — avoids fighting momentum
+     scroll on mobile, which caused flicker/height jumps with the toolbar. */
+  scroll-snap-type: y proximity;
   -webkit-tap-highlight-color: transparent;
 }
 
 section {
   scroll-snap-align: start;
-  scroll-snap-stop: always;
 }
 
 body {
