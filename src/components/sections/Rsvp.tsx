@@ -34,12 +34,16 @@ export function Rsvp() {
   };
 
   return (
-    <Section id="rsvp" className="pb-24">
+    <Section id="rsvp" className="pb-24 text-center">
       <ScrollReveal>
-        <p data-reveal className="label mb-4 text-hazelnut/70">
+        <p data-reveal className="section-eyebrow">
           {rsvp.label}
         </p>
-        <h2 data-reveal className="font-display text-display-md text-snow">
+        <h2
+          data-reveal
+          className="section-heading"
+          style={{ fontSize: "clamp(2rem, 8vw, 3.5rem)" }}
+        >
           {rsvp.title}
         </h2>
         <p data-reveal className="mt-4 text-body text-snow/55">
