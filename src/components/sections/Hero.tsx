@@ -10,6 +10,8 @@ export function Hero() {
   // Two-stage load: low-q first (priority), full-q only after the page finishes loading.
   const [hiRes, setHiRes] = useState(false);
   const [hiResLoaded, setHiResLoaded] = useState(false);
+  // Apply the radial mask only once a real image is on screen.
+  const [masked, setMasked] = useState(false);
 
   useEffect(() => {
     const start = () => {
@@ -19,11 +21,14 @@ export function Hero() {
           : (cb: () => void) => window.setTimeout(cb, 200);
       idle(() => setHiRes(true));
     };
+
     if (document.readyState === "complete") {
       start();
       return;
     }
+
     window.addEventListener("load", start, { once: true });
+
     return () => window.removeEventListener("load", start);
   }, []);
 
@@ -37,7 +42,9 @@ export function Hero() {
 
       {/* Layer 2 — photo, masked brighter at center / darker toward edges */}
       <div
-        className="hero__photo pointer-events-none absolute inset-0"
+        className={`hero__photo pointer-events-none absolute inset-0 ${
+          masked ? "is-masked" : ""
+        }`}
         aria-hidden
       >
         {/* Stage 1 — low quality, loads immediately */}
@@ -50,6 +57,7 @@ export function Hero() {
           quality={75}
           placeholder="blur"
           className="object-cover"
+          onLoad={() => setMasked(true)}
         />
         {/* Stage 2 — full quality, fetched after page load, fades in on top */}
         {hiRes && (

@@ -641,7 +641,8 @@ section {
 }
 
 /* ─── Hero photo layer (bright center, dark edges) ─── */
-.hero__photo {
+/* Mask applies only once an image has loaded (.is-masked toggled in Hero.tsx). */
+.hero__photo.is-masked {
   -webkit-mask-image: radial-gradient(ellipse 72% 66% at 50% 45%, #000 16%, transparent 74%);
   mask-image: radial-gradient(ellipse 72% 66% at 50% 45%, #000 16%, transparent 74%);
 }
