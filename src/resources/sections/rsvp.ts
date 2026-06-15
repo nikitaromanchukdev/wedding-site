@@ -11,7 +11,8 @@ export const rsvp = {
   comingSoonMessage: "RSVP opens soon. Check back closer to the date.",
   cta: {
     label: "Reserve your seat",
-    href: process.env.NEXT_PUBLIC_RSVP_URL || "#",
+    // Server redirect — real URL lives in the RSVP_URL env var, resolved by /go/rsvp.
+    href: "/go/rsvp",
   },
   fields: {
     name: {

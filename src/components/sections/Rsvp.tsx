@@ -54,9 +54,8 @@ export function Rsvp() {
           <a
             data-reveal
             href={rsvp.cta.href}
-            {...(rsvp.cta.href.startsWith("http")
-              ? { target: "_blank", rel: "noopener noreferrer" }
-              : {})}
+            target="_blank"
+            rel="noopener noreferrer"
             {...{ [CURSOR_ATTR]: "RSVP" }}
             className="rsvp-cta mt-10"
           >
