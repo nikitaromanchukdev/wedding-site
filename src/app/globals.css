@@ -642,8 +642,8 @@ section {
 
 /* ─── Hero photo layer (bright center, dark edges) ─── */
 .hero__photo {
-  -webkit-mask-image: radial-gradient(ellipse 72% 66% at 50% 45%, #000 16%, transparent 74%);
-  mask-image: radial-gradient(ellipse 72% 66% at 50% 45%, #000 16%, transparent 74%);
+  -webkit-mask-image: radial-gradient(85% 70% at 50% 50%, #000 16%, #0000 75%);
+  mask-image: radial-gradient(85% 70% at 50% 50%, #000 16%, #0000 75%);
 }
 .hero__photo img {
   object-position: 60%;
