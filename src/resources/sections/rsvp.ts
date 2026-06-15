@@ -11,7 +11,7 @@ export const rsvp = {
   comingSoonMessage: "RSVP opens soon. Check back closer to the date.",
   cta: {
     label: "Reserve your seat",
-    href: "https://t.me/+8H69pB0pM3Q5MDcy",
+    href: process.env.NEXT_PUBLIC_RSVP_URL || "#",
   },
   fields: {
     name: {

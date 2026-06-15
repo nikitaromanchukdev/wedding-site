@@ -8,16 +8,17 @@
  *
  * Form ID is the long string in the form URL:
  * https://docs.google.com/forms/d/e/{FORM_ID}/viewform
+ *
+ * Values come from NEXT_PUBLIC_* env vars (see .env.example).
  */
 export const googleForm = {
-  /** Replace with your Google Form ID */
-  formId: "YOUR_FORM_ID_HERE",
+  formId: process.env.NEXT_PUBLIC_GOOGLE_FORM_ID || "YOUR_FORM_ID_HERE",
 
   /** Maps logical field names → Google Form entry IDs */
   entries: {
-    name: "entry.000000000",
-    attending: "entry.000000001",
-    message: "entry.000000002",
+    name: process.env.NEXT_PUBLIC_GOOGLE_FORM_ENTRY_NAME || "entry.000000000",
+    attending: process.env.NEXT_PUBLIC_GOOGLE_FORM_ENTRY_ATTENDING || "entry.000000001",
+    message: process.env.NEXT_PUBLIC_GOOGLE_FORM_ENTRY_MESSAGE || "entry.000000002",
   },
 } as const;
 
