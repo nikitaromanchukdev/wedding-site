@@ -1,33 +1,37 @@
 "use client";
 
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { useEffect, useMemo, useState } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { Flip } from "gsap/Flip";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { ImageCard } from "@/components/ui/ImageCard";
+import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { brightnessFor, dressCodeExamples } from "@/resources";
+
+gsap.registerPlugin(Flip, useGSAP);
 
 const COLS = 6;
 const ROWS = 4;
+const FLIP_DUR = 0.55;
+const FLIP_EASE = "power3.inOut";
 
 type Cell = {
   uid: string;
-  exId: string;
   alt: string;
-  src: ReturnType<typeof exampleSrc>;
+  src: (typeof dressCodeExamples)[number]["src"];
   tint: string;
   brightness: number;
 };
 
-function exampleSrc(id: string) {
-  return dressCodeExamples.find((e) => e.id === id)?.src ?? null;
-}
-
 export function DressCodeShowcase() {
-  const reduce = useReducedMotion() ?? false;
+  const reduce = usePrefersReducedMotion();
   const [activeUid, setActiveUid] = useState<string | null>(null);
 
-  // Fill the section background with a deterministic grid; brightness rises
-  // toward the center for a spacious, lit-from-the-middle feel.
+  const cardRefs = useRef<Record<string, HTMLButtonElement | null>>({});
+  const modalRef = useRef<HTMLDivElement>(null);
+  const backdropRef = useRef<HTMLDivElement>(null);
+
   const cells = useMemo<Cell[]>(() => {
     const out: Cell[] = [];
     for (let i = 0; i < COLS * ROWS; i++) {
@@ -38,7 +42,6 @@ export function DressCodeShowcase() {
       const cy = ((row + 0.5) / ROWS) * 100;
       out.push({
         uid: `${ex.id}-${i}`,
-        exId: ex.id,
         alt: ex.alt,
         src: ex.src,
         tint: ex.tint,
@@ -48,65 +51,89 @@ export function DressCodeShowcase() {
     return out;
   }, []);
 
+  const active = cells.find((c) => c.uid === activeUid) ?? null;
+
+  // Open: Flip the portal modal FROM the clicked grid card TO its natural box.
+  useGSAP(
+    () => {
+      if (!activeUid) return;
+      const modal = modalRef.current;
+      const card = cardRefs.current[activeUid];
+      if (!modal || !card) return;
+
+      if (reduce) {
+        gsap.set(backdropRef.current, { opacity: 1 });
+        return;
+      }
+      const natural = Flip.getState(modal); // modal at its centered size
+      Flip.fit(modal, card); // snap onto the grid card (box, not scale → radius stays)
+      Flip.to(natural, { duration: FLIP_DUR, ease: FLIP_EASE, absolute: true });
+      gsap.fromTo(
+        backdropRef.current,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.45, delay: 0.1 },
+      );
+    },
+    { dependencies: [activeUid] },
+  );
+
+  // Close: Flip the modal back onto the card, then unmount.
+  const close = () => {
+    const modal = modalRef.current;
+    const card = activeUid ? cardRefs.current[activeUid] : null;
+    if (reduce || !modal || !card) {
+      setActiveUid(null);
+      return;
+    }
+    gsap.to(backdropRef.current, { opacity: 0, duration: 0.4 });
+    Flip.fit(modal, card, {
+      duration: FLIP_DUR,
+      ease: FLIP_EASE,
+      absolute: true,
+      onComplete: () => setActiveUid(null),
+    });
+  };
+
   useEffect(() => {
     if (!activeUid) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setActiveUid(null);
+      if (e.key === "Escape") close();
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeUid]);
-
-  const active = cells.find((c) => c.uid === activeUid) ?? null;
 
   return (
     <div className="dc-showcase" aria-hidden={activeUid ? undefined : "true"}>
-      {cells.map((cell) =>
-        cell.uid === activeUid ? (
-          <div key={cell.uid} className="dc-cell dc-cell--placeholder" />
-        ) : (
-          <motion.button
-            key={cell.uid}
-            type="button"
-            layoutId={cell.uid}
-            className="dc-cell"
-            onClick={() => setActiveUid(cell.uid)}
-            style={{ filter: `brightness(${cell.brightness})` }}
-            aria-label={cell.alt}
-          >
-            <ImageCard src={cell.src} alt={cell.alt} tint={cell.tint} />
-          </motion.button>
-        ),
-      )}
+      {cells.map((cell) => (
+        <button
+          key={cell.uid}
+          ref={(el) => {
+            cardRefs.current[cell.uid] = el;
+          }}
+          type="button"
+          className="dc-cell"
+          onClick={() => setActiveUid(cell.uid)}
+          style={{
+            filter: `brightness(${cell.brightness})`,
+            visibility: cell.uid === activeUid ? "hidden" : "visible",
+          }}
+          aria-label={cell.alt}
+        >
+          <ImageCard src={cell.src} alt={cell.alt} tint={cell.tint} />
+        </button>
+      ))}
 
-      {/* Portal to body so the masked / overflow-hidden / transformed section
-          ancestors don't clip the full-screen overlay. */}
-      {typeof document !== "undefined" &&
+      {active &&
+        typeof document !== "undefined" &&
         createPortal(
-          <AnimatePresence>
-            {active && (
-              <>
-                <motion.div
-                  key="backdrop"
-                  className="dc-backdrop"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  // lands together with the card flight, not before it
-                  transition={{ duration: 0.45, delay: reduce ? 0 : 0.1 }}
-                  onClick={() => setActiveUid(null)}
-                />
-                <motion.div
-                  key="modal"
-                  layoutId={active.uid}
-                  className="dc-modal"
-                  transition={reduce ? { duration: 0 } : { type: "spring", stiffness: 220, damping: 28 }}
-                >
-                  <ImageCard src={active.src} alt={active.alt} tint={active.tint} sizes="80vw" />
-                </motion.div>
-              </>
-            )}
-          </AnimatePresence>,
+          <>
+            <div ref={backdropRef} className="dc-backdrop" onClick={close} style={{ opacity: 0 }} />
+            <div ref={modalRef} className="dc-modal">
+              <ImageCard src={active.src} alt={active.alt} tint={active.tint} sizes="80vw" instant />
+            </div>
+          </>,
           document.body,
         )}
     </div>

@@ -12,6 +12,8 @@ type ImageCardProps = {
   style?: CSSProperties;
   /** Eager-load above-the-fold images. Defaults to lazy. */
   priority?: boolean;
+  /** Skip the load fade — image shows immediately (use when src is already cached). */
+  instant?: boolean;
   sizes?: string;
 };
 
@@ -27,9 +29,10 @@ export function ImageCard({
   className = "",
   style,
   priority = false,
+  instant = false,
   sizes = "(max-width: 767px) 50vw, 240px",
 }: ImageCardProps) {
-  const [loaded, setLoaded] = useState(false);
+  const [loaded, setLoaded] = useState(instant);
 
   return (
     <div

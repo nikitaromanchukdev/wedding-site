@@ -539,7 +539,6 @@ body {
   transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .dc-cell:hover { transform: scale(1.04); }
-.dc-cell--placeholder { pointer-events: none; }
 
 .dc-backdrop {
   position: fixed;
