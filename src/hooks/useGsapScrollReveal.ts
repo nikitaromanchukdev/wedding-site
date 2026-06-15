@@ -30,7 +30,9 @@ export function useGsapScrollReveal<T extends HTMLElement>(
       const el = ref.current;
       if (!el) return;
 
-      const targets = el.querySelectorAll(childSelector);
+      const targets = gsap.utils.toArray<HTMLElement>(
+        el.querySelectorAll(childSelector),
+      );
       if (!targets.length) return;
 
       gsap.set(targets, { opacity: 0, y });

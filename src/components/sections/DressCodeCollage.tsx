@@ -46,10 +46,15 @@ export function DressCodeCollage() {
   if (!isMobile) return null;
 
   return (
-    <section id="dresscode-collage" className="dc-collage" aria-label="Dress code inspiration">
+    <section
+      id="dresscode-collage"
+      className="dc-collage"
+      aria-label="Dress code inspiration"
+    >
       {dressCodeExamples.map((card) => (
         <motion.div
           key={card.id}
+          id={card.id}
           layoutId={`m-${card.id}`}
           className="dc-collage-item"
           onPointerDown={onPointerDown(card.id)}
@@ -63,7 +68,12 @@ export function DressCodeCollage() {
             visibility: card.id === expandedId ? "hidden" : "visible",
           }}
         >
-          <ImageCard src={card.src} alt={card.alt} tint={card.tint} sizes="50vw" />
+          <ImageCard
+            src={card.src}
+            alt={card.alt}
+            tint={card.tint}
+            sizes="50vw"
+          />
         </motion.div>
       ))}
 
@@ -76,7 +86,12 @@ export function DressCodeCollage() {
             onPointerUp={release}
             onPointerCancel={release}
           >
-            <ImageCard src={active.src} alt={active.alt} tint={active.tint} sizes="100vw" />
+            <ImageCard
+              src={active.src}
+              alt={active.alt}
+              tint={active.tint}
+              sizes="100vw"
+            />
           </motion.div>
         )}
       </AnimatePresence>

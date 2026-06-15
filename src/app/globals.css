@@ -41,14 +41,8 @@
 /* ─── Base ─── */
 html {
   scroll-behavior: smooth;
-  /* proximity (not mandatory) + no forced stop — avoids fighting momentum
-     scroll on mobile, which caused flicker/height jumps with the toolbar. */
-  scroll-snap-type: y mandatory;
+  scroll-snap-type: y proximity;
   -webkit-tap-highlight-color: transparent;
-}
-
-section {
-  scroll-snap-align: start;
 }
 
 body {
@@ -56,6 +50,10 @@ body {
   color: var(--foreground);
   font-family: var(--font-inter), system-ui, sans-serif;
   overflow-x: clip;
+}
+
+section {
+  scroll-snap-align: start;
 }
 
 /* ─── Typography utilities ─── */
@@ -101,7 +99,7 @@ body {
 
 /* ─── Journey / Timeline ─── */
 #timeline {
-  min-height: 100dvh;
+  min-height: 100lvh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -254,9 +252,8 @@ body {
 
 /* ─── Details Strip ─── */
 #details {
-  min-height: 100dvh;
+  min-height: 100lvh;
   background: var(--black);
-  border-top: 1px solid rgba(207, 181, 158, 0.07);
   padding: 8svh var(--gx);
   display: flex;
   flex-direction: column;
@@ -345,9 +342,8 @@ body {
 
 /* ─── Dress Code ─── */
 #dresscode {
-  min-height: 100dvh;
+  min-height: 100lvh;
   background: var(--black);
-  border-top: 1px solid rgba(207, 181, 158, 0.07);
   padding: 8svh var(--gx);
   display: flex;
   flex-direction: column;
@@ -425,7 +421,7 @@ body {
 
   #palette {
     display: flex;
-    min-height: 100dvh;
+    min-height: 100lvh;
     background: var(--black);
   }
   .band-grid {
@@ -568,7 +564,7 @@ body {
   align-content: center;
   gap: 8px;
   width: 100%;
-  min-height: 100dvh;
+  min-height: 100lvh;
   padding: var(--gx);
   background: var(--black);
 }
@@ -644,7 +640,7 @@ body {
   mask-image: radial-gradient(ellipse 72% 66% at 50% 45%, #000 16%, transparent 74%);
 }
 .hero__photo img {
-  object-position: 55%;
+  object-position: 60%;
   /* warm the B&W toward the palette — soft sepia, not full mono */
   filter: sepia(0.35) saturate(1.3) hue-rotate(-12deg) brightness(1.04) contrast(1.02);
 }
