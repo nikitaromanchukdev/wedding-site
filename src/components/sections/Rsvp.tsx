@@ -46,6 +46,20 @@ export function Rsvp() {
           {rsvp.description}
         </p>
 
+        {!features.rsvpForm && (
+          <a
+            data-reveal
+            href={rsvp.cta.href}
+            {...(rsvp.cta.href.startsWith("http")
+              ? { target: "_blank", rel: "noopener noreferrer" }
+              : {})}
+            {...{ [CURSOR_ATTR]: "cta" }}
+            className="rsvp-cta mt-10"
+          >
+            {rsvp.cta.label}
+          </a>
+        )}
+
         {features.rsvpForm && (
           <form
             data-reveal

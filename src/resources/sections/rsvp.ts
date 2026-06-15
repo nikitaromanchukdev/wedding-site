@@ -9,6 +9,10 @@ export const rsvp = {
   successMessage: "Thank you — your RSVP has been received.",
   errorMessage: "Something went wrong. Please try again.",
   comingSoonMessage: "RSVP opens soon. Check back closer to the date.",
+  cta: {
+    label: "Reserve your seat",
+    href: "#", // TODO: point to the live RSVP form / invitation URL
+  },
   fields: {
     name: {
       label: "Your name",

@@ -600,6 +600,36 @@ body {
   .dc-cell:hover { transform: none; }
 }
 
+/* ─── RSVP CTA (text link, hazelnut, underline sweep on hover) ─── */
+.rsvp-cta {
+  position: relative;
+  display: inline-block;
+  color: var(--hazelnut);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding-bottom: 0.4em;
+}
+.rsvp-cta::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--hazelnut);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.rsvp-cta:hover::after { transform: scaleX(1); }
+
+@media (prefers-reduced-motion: reduce) {
+  .rsvp-cta::after { transition: none; }
+}
+
 /* ─── Hero ambient glow ─── */
 .hero__glow {
   background:
