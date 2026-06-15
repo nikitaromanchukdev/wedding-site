@@ -40,13 +40,13 @@
 
 /* ─── Base ─── */
 html {
-  scroll-behavior: smooth;
   scroll-snap-type: y proximity;
   -webkit-tap-highlight-color: transparent;
 }
 
 @media (min-width: 768px) {
   html {
+    scroll-behavior: smooth;
     scroll-snap-type: y mandatory;
   }
 }
