@@ -1,13 +1,14 @@
 "use client";
 
 import { motion, type HTMLMotionProps } from "framer-motion";
-import { CURSOR_ATTR, type CursorTargetType } from "@/components/cursor/cursor-config";
+import { CURSOR_ATTR } from "@/components/cursor/cursor-config";
 import { TOUCH_TARGET_MIN } from "@/lib/constants";
 
 type ButtonProps = Omit<HTMLMotionProps<"button">, "children"> & {
   children: React.ReactNode;
   variant?: "primary" | "secondary" | "ghost";
-  cursorType?: CursorTargetType;
+  /** Text shown inside the cursor ring on hover (empty = grow with no label). */
+  cursorLabel?: string;
   fullWidth?: boolean;
 };
 
@@ -22,7 +23,7 @@ const variants = {
 export function Button({
   children,
   variant = "primary",
-  cursorType = "cta",
+  cursorLabel = "",
   fullWidth = true,
   className = "",
   ...props
@@ -33,7 +34,7 @@ export function Button({
       transition={{ type: "spring", stiffness: 400, damping: 25 }}
       className={`inline-flex items-center justify-center rounded-full px-8 py-3.5 text-sm font-medium tracking-wide transition-colors duration-300 ${fullWidth ? "w-full" : ""} ${variants[variant]} ${className}`}
       style={{ minHeight: TOUCH_TARGET_MIN }}
-      {...{ [CURSOR_ATTR]: cursorType }}
+      {...{ [CURSOR_ATTR]: cursorLabel }}
       {...props}
     >
       {children}

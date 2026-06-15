@@ -637,82 +637,52 @@ body {
     radial-gradient(ellipse 60% 40% at 50% 100%, rgba(196, 162, 101, 0.06), transparent);
 }
 
-/* ─── Cursor proximity reactions (desktop) ─── */
-@media (hover: hover) and (pointer: fine) {
-  [data-cursor-nearby] {
-    transform: translateY(-2px);
-    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  .detail-card[data-cursor-nearby] {
-    border-color: rgba(196, 162, 101, 0.25);
-    background: rgba(245, 240, 232, 0.05);
-  }
-
-  .timeline-item[data-cursor-nearby] .label {
-    color: var(--hazelnut-light);
-  }
+/* ─── Custom cursor ring (desktop, fine pointer) ─── */
+html.cursor-hidden,
+html.cursor-hidden * {
+  cursor: none !important;
 }
 
-/* ─── Desktop lens cursor ─── */
-@media (hover: hover) and (pointer: fine) {
-  .lens-cursor-active,
-  .lens-cursor-active * {
-    cursor: none !important;
-  }
-}
-
-.lens-cursor {
-  width: 48px;
-  height: 48px;
+#cursor {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--hazelnut);
+  border-radius: 999px;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transform-origin: center center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  opacity: 0;
+  transition: width 0.25s ease, height 0.25s ease, background 0.25s ease, border-color 0.25s ease, opacity 0.3s ease;
   will-change: transform, width, height;
 }
-
-.lens-cursor__glass {
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  background: rgba(245, 240, 232, 0.04);
-  backdrop-filter: blur(6px) saturate(1.4);
-  -webkit-backdrop-filter: blur(6px) saturate(1.4);
-  box-shadow:
-    inset 0 0 12px rgba(255, 255, 255, 0.06),
-    0 0 24px rgba(196, 162, 101, 0.08);
-  transition: box-shadow 0.3s ease;
+#cursor.is-hover {
+  width: 80px;
+  height: 80px;
+  background: rgba(207, 181, 158, 0.08);
+  border-color: var(--hazelnut-light);
+}
+#cursor-label {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--snow);
+  user-select: none;
 }
 
-.lens-cursor__ring {
-  position: absolute;
-  inset: -2px;
-  border-radius: 50%;
-  border: 1px solid rgba(196, 162, 101, 0.25);
-  transition: border-color 0.3s ease, opacity 0.3s ease;
-}
-
-.lens-cursor[data-state="cta"] .lens-cursor__ring {
-  border-color: rgba(196, 162, 101, 0.5);
-}
-
-.lens-cursor[data-state="cta"] .lens-cursor__glass {
-  box-shadow:
-    inset 0 0 16px rgba(255, 255, 255, 0.08),
-    0 0 32px rgba(196, 162, 101, 0.15);
-}
-
-.lens-cursor[data-state="form"] .lens-cursor__ring {
-  border-color: rgba(245, 240, 232, 0.4);
-  inset: -1px;
-}
-
-.lens-cursor[data-state="video"] .lens-cursor__glass::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 55%;
-  transform: translate(-50%, -50%);
-  border-style: solid;
-  border-width: 6px 0 6px 10px;
-  border-color: transparent transparent transparent rgba(245, 240, 232, 0.6);
+/* Opt-in magnetic elements (pulled toward the cursor). */
+.magnetic {
+  transition: transform 0.25s ease;
+  will-change: transform;
 }
 
 /* ─── Reduced motion ─── */

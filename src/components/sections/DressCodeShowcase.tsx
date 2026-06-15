@@ -114,6 +114,7 @@ export function DressCodeShowcase() {
           }}
           type="button"
           className="dc-cell"
+          data-cursor="View"
           onClick={() => setActiveUid(cell.uid)}
           style={{
             filter: `brightness(${cell.brightness})`,

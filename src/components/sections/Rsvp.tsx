@@ -53,7 +53,7 @@ export function Rsvp() {
             {...(rsvp.cta.href.startsWith("http")
               ? { target: "_blank", rel: "noopener noreferrer" }
               : {})}
-            {...{ [CURSOR_ATTR]: "cta" }}
+            {...{ [CURSOR_ATTR]: "RSVP" }}
             className="rsvp-cta mt-10"
           >
             {rsvp.cta.label}
@@ -76,7 +76,7 @@ export function Rsvp() {
                 required
                 placeholder={rsvp.fields.name.placeholder}
                 autoComplete="name"
-                {...{ [CURSOR_ATTR]: "form" }}
+                {...{ [CURSOR_ATTR]: "" }}
                 className="form-input min-h-12 rounded-xl border border-snow/10 bg-snow/[0.04] px-4 py-3 text-snow placeholder:text-snow/25 outline-none transition-colors focus:border-hazelnut/40"
               />
             </label>
@@ -89,7 +89,7 @@ export function Rsvp() {
                 name="attending"
                 required
                 defaultValue=""
-                {...{ [CURSOR_ATTR]: "form" }}
+                {...{ [CURSOR_ATTR]: "" }}
                 className="form-input min-h-12 rounded-xl border border-snow/10 bg-snow/[0.04] px-4 py-3 text-snow outline-none transition-colors focus:border-hazelnut/40"
               >
                 <option value="" disabled>
@@ -111,7 +111,7 @@ export function Rsvp() {
                 name="message"
                 rows={3}
                 placeholder={rsvp.fields.message.placeholder}
-                {...{ [CURSOR_ATTR]: "form" }}
+                {...{ [CURSOR_ATTR]: "" }}
                 className="form-input resize-none rounded-xl border border-snow/10 bg-snow/[0.04] px-4 py-3 text-snow placeholder:text-snow/25 outline-none transition-colors focus:border-hazelnut/40"
               />
             </label>
