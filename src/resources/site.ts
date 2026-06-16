@@ -10,7 +10,7 @@ export const site = {
   venue: "Villa Omnia",
   location: "Trębki Nowe 17A, 05-170",
   tagline: "Приглашаем вас разделить с нами\nэтот особенный день",
-  rsvpDeadline: "1 августа",
+  rsvpDeadline: "1 июля",
   /** Google Maps link built from the venue + address. */
   get mapsUrl() {
     return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
