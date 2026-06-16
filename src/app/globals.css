@@ -151,6 +151,8 @@ section {
   text-transform: uppercase;
   color: var(--hazelnut);
   margin-bottom: 1rem;
+
+  font-family: var(--font-inter);
 }
 .section-heading {
   font-family: var(--font-comorant), Georgia, serif;
@@ -193,9 +195,10 @@ section {
 
 .t-year {
   font-family: var(--font-comorant), Georgia, serif;
-  font-size: 0.75rem;
+  font-size: 1.2rem;
   font-weight: 400;
-  letter-spacing: 0.18em;
+  line-height: 1;
+  letter-spacing: 0.12em;
   color: var(--hazelnut);
   display: block;
   margin-bottom: 0.45rem;
