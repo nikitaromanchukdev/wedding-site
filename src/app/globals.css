@@ -49,6 +49,24 @@ html {
     scroll-behavior: smooth;
     scroll-snap-type: y mandatory;
   }
+
+  section {
+    /* Force a hard stop at every snap point — no flinging past one. */
+    scroll-snap-stop: always;
+  }
+
+  /* Tall sections (content > viewport) only top-snap by default, so a
+     downward scroll never rests at their end. Add an end-aligned sentinel
+     at the bottom edge so scrolling down stops there, up stops at the top. */
+  #timeline::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    height: 1px;
+    scroll-snap-align: end;
+    pointer-events: none;
+  }
 }
 
 body {
