@@ -71,13 +71,13 @@ export function Hero() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-        className="relative z-10 mt-0 mb-6 text-xs font-medium uppercase tracking-[0.35em] text-hazelnut/80 md:mt-auto"
+        className="relative z-10 mt-0 mb-6 text-xs font-medium uppercase tracking-[0.35em] text-hazelnut/80"
       >
         {hero.eyebrow}
       </motion.p>
 
       {/* Name + tagline — bottom on mobile */}
-      <div className="relative z-10 mt-auto flex flex-col items-center md:mt-0">
+      <div className="relative z-10 mt-auto flex flex-col items-center">
         <motion.h1
           initial={{ opacity: 0, y: 32 }}
           animate={{ opacity: 1, y: 0 }}
