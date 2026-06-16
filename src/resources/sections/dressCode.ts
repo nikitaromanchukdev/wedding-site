@@ -1,8 +1,8 @@
 export const dressCode = {
-  label: "Dress Code",
-  title: "A palette\nto wear",
+  label: "Дресс-код",
+  title: "Палитра\nдля образа",
   description:
-    "Your presence is what matters most — but if you'd like to dress in tune with the evening, we'd love for you to draw from our palette. Warm neutrals and soft blues. Please avoid white.",
+    "Важнее всего ваше присутствие — но если вы захотите одеться в тон вечеру, будем рады, если вы вдохновитесь нашей палитрой. Тёплые нейтральные тона и мягкие голубые оттенки. Пожалуйста, избегайте белого.",
   palette: [
     { name: "Black", hex: "#0B0B0D", var: "--black", dark: true },
     { name: "Dark Chocolate", hex: "#341F1A", var: "--dark-chocolate", dark: true },

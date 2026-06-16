@@ -1,8 +1,8 @@
 export const story = {
-  label: "Our Story",
-  title: "A chance encounter became forever",
+  label: "Наша история",
+  title: "Случайная встреча стала навсегда",
   paragraphs: [
-    "We met on a rainy afternoon in Florence — two strangers sharing an umbrella outside a bookshop. What began as small talk over espresso became late-night walks, cross-country adventures, and a love we knew was meant to be.",
-    "Now we invite you to witness the next chapter of our story, surrounded by the people who shaped who we are.",
+    "Мы встретились дождливым днём во Florence — два незнакомца под одним зонтом у книжного магазина. То, что началось с лёгкой беседы за чашкой эспрессо, превратилось в ночные прогулки, путешествия через всю страну и любовь, которой, как мы знали, суждено было случиться.",
+    "Теперь мы приглашаем вас стать свидетелями следующей главы нашей истории — в окружении людей, которые сделали нас теми, кто мы есть.",
   ],
 } as const;

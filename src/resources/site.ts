@@ -1,17 +1,17 @@
 export const site = {
   couple: "Sarah & James",
-  date: "Saturday, September 14, 2026",
+  date: "Суббота, 14 сентября 2026 года",
   weddingDateTime: new Date("2026-09-14T16:30:00"),
   dateDisplay: {
     day: "14",
-    month: "September",
-    year: "Two Thousand & Twenty-Six",
-    time: "Ceremonies begin at 4:30 PM",
+    month: "Сентября",
+    year: "Две тысячи двадцать шестого",
+    time: "Церемония начнётся в 16:30",
   },
   venue: "Villa Serenità",
   location: "Lake Como, Italy",
-  tagline: "Two hearts, one beautiful beginning",
-  rsvpDeadline: "August 1st",
+  tagline: "Два сердца, одно прекрасное начало",
+  rsvpDeadline: "1 августа",
 } as const;
 
 export const features = {
@@ -20,7 +20,7 @@ export const features = {
 } as const;
 
 export const meta = {
-  titleSuffix: "Wedding Invitation",
+  titleSuffix: "Приглашение на свадьбу",
   get title() {
     return `${site.couple} — ${meta.titleSuffix}`;
   },

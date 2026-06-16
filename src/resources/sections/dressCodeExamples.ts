@@ -65,7 +65,7 @@ export const dressCodeExamples: DressCodeExample[] = PHOTOS.map((photo, i) => {
 
   return {
     id: photo.id,
-    alt: `Dress code inspiration ${i + 1}`,
+    alt: `Образ для вдохновения по дресс-коду ${i + 1}`,
     src: photo.src,
     tint: TINTS[i % TINTS.length],
     colSpan,

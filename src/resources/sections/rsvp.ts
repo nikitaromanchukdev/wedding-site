@@ -1,35 +1,35 @@
 import { site } from "../site";
 
 export const rsvp = {
-  label: "RSVP",
-  title: "Will you join us?",
-  description: `Please respond by ${site.rsvpDeadline}. We can't wait to celebrate with you.`,
-  submitLabel: "Send RSVP",
-  submittingLabel: "Sending...",
-  successMessage: "Thank you — your RSVP has been received.",
-  errorMessage: "Something went wrong. Please try again.",
-  comingSoonMessage: "RSVP opens soon. Check back closer to the date.",
+  label: "Подтверждение",
+  title: "Вы присоединитесь к нам?",
+  description: `Пожалуйста, ответьте до ${site.rsvpDeadline}. Не можем дождаться, чтобы отпраздновать вместе с вами.`,
+  submitLabel: "Отправить ответ",
+  submittingLabel: "Отправка...",
+  successMessage: "Спасибо — ваш ответ получен.",
+  errorMessage: "Что-то пошло не так. Пожалуйста, попробуйте ещё раз.",
+  comingSoonMessage: "Приём ответов скоро откроется. Загляните ближе к дате.",
   cta: {
-    label: "Reserve your seat",
+    label: "Забронировать место",
     // Server redirect — real URL lives in the RSVP_URL env var, resolved by /go/rsvp.
     href: "/go/rsvp",
   },
   fields: {
     name: {
-      label: "Your name",
-      placeholder: "Full name",
+      label: "Ваше имя",
+      placeholder: "Полное имя",
     },
     attending: {
-      label: "Attending?",
-      placeholder: "Select response",
+      label: "Придёте?",
+      placeholder: "Выберите ответ",
       options: [
-        { value: "yes", label: "Joyfully accepts" },
-        { value: "no", label: "Regretfully declines" },
+        { value: "yes", label: "С радостью приду" },
+        { value: "no", label: "К сожалению, не смогу" },
       ],
     },
     message: {
-      label: "Message (optional)",
-      placeholder: "Share your wishes...",
+      label: "Сообщение (необязательно)",
+      placeholder: "Поделитесь пожеланиями...",
     },
   },
 } as const;

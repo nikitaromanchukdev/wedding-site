@@ -1,9 +1,9 @@
 export const dateReveal = {
-  eyebrow: "Mark your calendar",
+  eyebrow: "Отметьте в календаре",
   countdown: {
-    days: "Days",
-    hours: "Hours",
-    minutes: "Mins",
-    seconds: "Secs",
+    days: "Дней",
+    hours: "Часов",
+    minutes: "Мин",
+    seconds: "Сек",
   },
 } as const;
