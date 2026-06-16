@@ -66,7 +66,7 @@ export function DateReveal() {
 
       {/* Giant date */}
       <div
-        aria-label={`Wedding date: ${site.dateDisplay.day} ${site.dateDisplay.month} ${site.dateDisplay.year}`}
+        aria-label={`Wedding date: ${site.dateDisplay.day} ${site.dateDisplay.month}`}
         style={{
           clipPath: visible ? "inset(0 0 0% 0)" : "inset(0 0 100% 0)",
           transition: "clip-path 1.3s cubic-bezier(0.76,0,0.24,1) 0s",
@@ -95,24 +95,6 @@ export function DateReveal() {
           }}
         >
           {site.dateDisplay.month}
-        </span>
-      </div>
-
-      <div
-        style={{
-          clipPath: visible ? "inset(0 0 0% 0)" : "inset(0 0 100% 0)",
-          transition: "clip-path 0.9s cubic-bezier(0.76,0,0.24,1) 500ms",
-        }}
-      >
-        <span
-          className="mt-3 block text-hazelnut"
-          style={{
-            fontSize: "clamp(0.8rem,3.5vw,1.6rem)",
-            fontWeight: 300,
-            letterSpacing: "0.5em",
-          }}
-        >
-          {site.dateDisplay.year}
         </span>
       </div>
 

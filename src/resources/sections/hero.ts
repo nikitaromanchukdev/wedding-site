@@ -1,7 +1,7 @@
 import { site } from "../site";
 
 export const hero = {
-  eyebrow: "Вы приглашены",
+  eyebrow: "Invite",
   scrollHint: "Листайте, чтобы узнать больше",
   couple: site.couple,
   tagline: site.tagline,
