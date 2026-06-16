@@ -73,6 +73,31 @@ export const dressCodeExamples: DressCodeExample[] = PHOTOS.map((photo, i) => {
   };
 });
 
+/** Lookup an example by its id (for layouts that reference ids directly). */
+export const dressCodeById: Record<string, DressCodeExample> =
+  Object.fromEntries(dressCodeExamples.map((ex) => [ex.id, ex]));
+
+/**
+ * Desktop showcase layout — 6 cols × 4 rows (row-major), 24 slots.
+ *
+ * Hand-tuned so that (a) the 6 central slots that the content card obscures
+ * hold DUPLICATE looks, and (b) the 18 visible slots never place two looks of
+ * the same colour next to each other (horizontally or vertically).
+ *
+ * Colour key (from the photos): brown 3,6,7,12,18 · blue 4,5,13,16,17 ·
+ * black 2,9,14 · white 8,10,15 · hazelnut 1,11.
+ */
+export const dressCodeDesktopLayout: string[] = [
+  // row 0 (all visible)
+  "look-3", "look-4", "look-2", "look-6", "look-5", "look-8",
+  // row 1 — cols 1-3 obscured (dups)
+  "look-13", "look-6", "look-5", "look-8", "look-7", "look-16",
+  // row 2 — cols 2-4 obscured (dups)
+  "look-12", "look-17", "look-7", "look-4", "look-13", "look-18",
+  // row 3 (all visible)
+  "look-9", "look-10", "look-14", "look-1", "look-15", "look-11",
+];
+
 /**
  * Static brightness as a function of distance from the showcase center (50,50).
  * Darkest at the center ⇒ 0.3, brightest toward the edges ⇒ 0.8 (cap).

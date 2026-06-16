@@ -6,7 +6,12 @@ export { hero } from "./sections/hero";
 export { dateReveal } from "./sections/dateReveal";
 export { details } from "./sections/details";
 export { dressCode } from "./sections/dressCode";
-export { dressCodeExamples, brightnessFor } from "./sections/dressCodeExamples";
+export {
+  dressCodeExamples,
+  dressCodeById,
+  dressCodeDesktopLayout,
+  brightnessFor,
+} from "./sections/dressCodeExamples";
 export type { DressCodeExample } from "./sections/dressCodeExamples";
 export { timeline } from "./sections/timeline";
 export { rsvp } from "./sections/rsvp";

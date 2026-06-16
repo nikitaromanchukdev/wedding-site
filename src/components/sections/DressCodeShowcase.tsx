@@ -7,7 +7,12 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { ImageCard } from "@/components/ui/ImageCard";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
-import { brightnessFor, dressCodeExamples } from "@/resources";
+import {
+  brightnessFor,
+  dressCodeById,
+  dressCodeDesktopLayout,
+  dressCodeExamples,
+} from "@/resources";
 
 gsap.registerPlugin(Flip, useGSAP);
 
@@ -35,7 +40,8 @@ export function DressCodeShowcase() {
   const cells = useMemo<Cell[]>(() => {
     const out: Cell[] = [];
     for (let i = 0; i < COLS * ROWS; i++) {
-      const ex = dressCodeExamples[i % dressCodeExamples.length];
+      const id = dressCodeDesktopLayout[i % dressCodeDesktopLayout.length];
+      const ex = dressCodeById[id] ?? dressCodeExamples[i % dressCodeExamples.length];
       const col = i % COLS;
       const row = Math.floor(i / COLS);
       const cx = ((col + 0.5) / COLS) * 100;
