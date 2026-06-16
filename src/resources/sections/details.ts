@@ -3,7 +3,7 @@ import { site } from "../site";
 export type BodySegment = { text: string; strong?: boolean };
 
 export const details = {
-  label: "Полезно знать",
+  label: "good to know",
   title: "Всё, что\nвам нужно",
   cards: [
     {

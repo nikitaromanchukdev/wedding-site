@@ -1,5 +1,5 @@
 export const timeline = {
-  label: "Праздник",
+  label: "the celebration",
   title: "День, который запомнится",
   milestones: [
     {
