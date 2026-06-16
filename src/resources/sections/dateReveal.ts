@@ -1,5 +1,5 @@
 export const dateReveal = {
-  eyebrow: "Отметьте в календаре",
+  eyebrow: "save the date",
   countdown: {
     days: "Дней",
     hours: "Часов",

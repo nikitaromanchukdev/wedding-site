@@ -1,16 +1,22 @@
 export const site = {
   couple: "Irina & Nikita",
-  date: "Суббота, 14 сентября 2026 года",
-  weddingDateTime: new Date("2026-09-14T16:30:00"),
+  date: "Суббота, 1 августа 2026 года",
+  weddingDateTime: new Date("2026-08-01T17:00:00"),
   dateDisplay: {
-    day: "14",
-    month: "Сентября",
-    time: "Церемония начнётся в 16:30",
+    day: "1",
+    month: "Августа",
+    time: "Церемония начнётся в 17:00",
   },
-  venue: "Villa Serenità",
-  location: "Lake Como, Italy",
-  tagline: "Приглашаем вас разделить с нами этот особенный день",
+  venue: "Villa Omnia",
+  location: "Trębki Nowe 17A, 05-170",
+  tagline: "Приглашаем вас разделить с нами\nэтот особенный день",
   rsvpDeadline: "1 августа",
+  /** Google Maps link built from the venue + address. */
+  get mapsUrl() {
+    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+      `${this.venue}, ${this.location}`
+    )}`;
+  },
 } as const;
 
 export const features = {

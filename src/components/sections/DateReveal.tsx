@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { WeddingCalendar } from "@/components/ui/WeddingCalendar";
 import { dateReveal, site } from "@/resources";
 
 function pad(n: number) {
@@ -64,38 +65,20 @@ export function DateReveal() {
         {dateReveal.eyebrow}
       </p>
 
-      {/* Giant date */}
-      <div
-        aria-label={`Wedding date: ${site.dateDisplay.day} ${site.dateDisplay.month}`}
-        style={{
-          clipPath: visible ? "inset(0 0 0% 0)" : "inset(0 0 100% 0)",
-          transition: "clip-path 1.3s cubic-bezier(0.76,0,0.24,1) 0s",
-        }}
-      >
-        <span
-          className="font-display block text-black leading-[0.85]"
-          style={{ fontSize: "clamp(7rem,32vw,16rem)", fontWeight: 400 }}
-        >
-          {site.dateDisplay.day}
-        </span>
-      </div>
-
+      {/* Calendar — the reserved day circled by hand */}
       <div
         style={{
-          clipPath: visible ? "inset(0 0 0% 0)" : "inset(0 0 100% 0)",
-          transition: "clip-path 1.1s cubic-bezier(0.76,0,0.24,1) 250ms",
+          opacity: visible ? 1 : 0,
+          transform: visible ? "translateY(0)" : "translateY(24px)",
+          transition:
+            "opacity 1s cubic-bezier(0.22,1,0.36,1) 150ms, transform 1.1s cubic-bezier(0.22,1,0.36,1) 150ms",
         }}
       >
-        <span
-          className="font-display block italic text-black"
-          style={{
-            fontSize: "clamp(2rem,9vw,5rem)",
-            fontWeight: 400,
-            letterSpacing: "0.04em",
-          }}
-        >
-          {site.dateDisplay.month}
-        </span>
+        <WeddingCalendar
+          date={site.weddingDateTime}
+          animate={visible}
+          className="w-[min(82vw,480px)]"
+        />
       </div>
 
       {/* Ornamental rule */}
@@ -125,14 +108,25 @@ export function DateReveal() {
             "opacity 0.9s cubic-bezier(0.22,1,0.36,1) 1100ms, transform 0.9s cubic-bezier(0.22,1,0.36,1) 1100ms",
         }}
       >
-        <span
-          className="font-display mb-2 block italic text-black"
-          style={{ fontSize: "clamp(1.5rem,6vw,2.5rem)", fontWeight: 400 }}
+        <a
+          href={site.mapsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          data-cursor="Карта"
+          aria-label={`${site.venue}, ${site.location} — открыть на карте`}
+          className="group inline-block transition-opacity duration-300 hover:opacity-80"
         >
-          {site.venue}
-        </span>
-        <span className="label mb-1 block text-hazelnut">{site.location}</span>
-        <span className="label block text-hazelnut/60">
+          <span
+            className="font-display mb-2 block italic text-black"
+            style={{ fontSize: "clamp(1.5rem,6vw,2.5rem)", fontWeight: 400 }}
+          >
+            {site.venue}
+          </span>
+          <span className="label mb-1 block text-hazelnut underline decoration-hazelnut/30 decoration-1 underline-offset-4 transition-colors group-hover:decoration-hazelnut">
+            {site.location}
+          </span>
+        </a>
+        <span className="label mt-1 block text-hazelnut/60">
           {site.dateDisplay.time}
         </span>
       </div>
