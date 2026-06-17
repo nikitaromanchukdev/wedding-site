@@ -600,23 +600,22 @@ section {
 }
 .dc-collage-item {
   position: relative;
+  width: 100%;
   height: 100%;
+  display: block;
+  padding: 0;
+  border: 0;
+  margin: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  appearance: none;
+  -webkit-appearance: none;
   cursor: pointer;
   touch-action: manipulation;
   user-select: none;
   -webkit-user-select: none;
   -webkit-touch-callout: none;
-}
-.dc-collage-expanded {
-  position: fixed;
-  inset: 0;
-  z-index: 80;
-  background: var(--black);
-}
-.dc-collage-expanded .image-card {
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
